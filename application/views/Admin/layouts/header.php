@@ -179,7 +179,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="<?php echo base_url('ca-nhan/'); ?>" class="nav-link">
+            <a href="<?php echo base_url('admin/khach-hang/'); ?>" class="nav-link">
               <i class="nav-icon fa-solid fa-user"></i>
               <p>
                 Khách Hàng

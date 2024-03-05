@@ -17,7 +17,6 @@ $route['admin/chuyen-muc/them'] = 'Admin/ChuyenMuc/add';
 $route['admin/chuyen-muc/(:any)/sua'] = 'Admin/ChuyenMuc/update/$1';
 $route['admin/chuyen-muc/(:any)/xoa'] = 'Admin/ChuyenMuc/delete/$1';
 
-
 $route['admin/tin-tuc'] = 'Admin/TinTuc';
 $route['admin/tin-tuc/(:any)/trang'] = 'Admin/TinTuc/page/$1';
 $route['admin/tin-tuc/them'] = 'Admin/TinTuc/add';
@@ -36,3 +35,7 @@ $route['admin/lien-he/(:any)/xem'] = 'Admin/LienHe/view/$1';
 
 $route['admin/cau-hinh'] = 'Admin/CauHinh';
 
+$route['admin/khach-hang'] = 'Admin/KhachHang';
+$route['admin/khach-hang/(:any)/trang'] = 'Admin/KhachHang/page/$1';
+$route['admin/khach-hang/(:any)/xem'] = 'Admin/KhachHang/view/$1';
+$route['admin/khach-hang/(:any)/trang-thai'] = 'Admin/KhachHang/status/$1';
