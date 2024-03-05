@@ -188,7 +188,7 @@
           </li>
           <li class="nav-header">CÀI ĐẶT CHUNG</li>
           <li class="nav-item has-treeview">
-            <a href="<?php echo base_url('ca-nhan/'); ?>" class="nav-link">
+            <a href="<?php echo base_url('admin/cau-hinh/'); ?>" class="nav-link">
               <i class="nav-icon fa-solid fa-gear"></i>
               <p>
                 Cấu Hình

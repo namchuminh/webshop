@@ -33,3 +33,6 @@ $route['admin/ma-giam-gia/(:any)/xoa'] = 'Admin/MaGiamGia/delete/$1';
 $route['admin/lien-he'] = 'Admin/LienHe';
 $route['admin/lien-he/(:any)/trang'] = 'Admin/LienHe/page/$1';
 $route['admin/lien-he/(:any)/xem'] = 'Admin/LienHe/view/$1';
+
+$route['admin/cau-hinh'] = 'Admin/CauHinh';
+

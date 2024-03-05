@@ -14,13 +14,13 @@ class DangNhap extends CI_Controller {
 
 	public function index()
 	{	
-		$data['title'] = "Đăng nhập tài khoản quản trị!";
+		$data['title'] = "Đăng nhập tài khoản quản trị";
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
             $taikhoan = $this->input->post('taikhoan');
 			$matkhau = $this->input->post('matkhau');
 
 			if($taikhoan == "" || $matkhau == ""){
-				$data["error"] = "Tài khoản hoặc mật khẩu không được trống!";
+				$data["error"] = "Tài khoản hoặc mật khẩu không được trống";
 				return $this->load->view('Admin/View_DangNhap', $data);
 			}
 
@@ -38,10 +38,10 @@ class DangNhap extends CI_Controller {
 				    'hoten' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['HoTen'],
 				);
 				$this->session->set_userdata($newdata);
-				$this->session->set_flashdata('success', 'Đăng nhập thành công!');
+				$this->session->set_flashdata('success', 'Đăng nhập thành công');
 				return redirect(base_url('admin/'));
 			}else{
-				$data["error"] = "Tài khoản hoặc mật khẩu không đúng!";
+				$data["error"] = "Tài khoản hoặc mật khẩu không đúng";
 				return $this->load->view('Admin/View_DangNhap', $data);
 			}
 
