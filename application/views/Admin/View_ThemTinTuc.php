@@ -9,8 +9,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Trang Chủ</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('tin-tuc/'); ?>">Quản Lý Tin Tức</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('admin/'); ?>">Trang Chủ</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('admin/tin-tuc/'); ?>">Quản Lý Tin Tức</a></li>
               <li class="breadcrumb-item active">Thêm Tin Tức</li>
             </ol>
           </div>

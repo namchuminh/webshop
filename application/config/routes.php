@@ -39,3 +39,6 @@ $route['admin/khach-hang'] = 'Admin/KhachHang';
 $route['admin/khach-hang/(:any)/trang'] = 'Admin/KhachHang/page/$1';
 $route['admin/khach-hang/(:any)/xem'] = 'Admin/KhachHang/view/$1';
 $route['admin/khach-hang/(:any)/trang-thai'] = 'Admin/KhachHang/status/$1';
+
+
+$route['admin/ca-nhan'] = 'Admin/CaNhan';

@@ -9,8 +9,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Trang Chủ</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url('chuyen-muc/'); ?>">Quản Lý Cấu Hình</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('admin/'); ?>">Trang Chủ</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url('admin/cau-hinh/'); ?>">Quản Lý Cấu Hình</a></li>
               <li class="breadcrumb-item active">Cập Nhật Cấu Hình</li>
             </ol>
           </div>

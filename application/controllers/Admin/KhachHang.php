@@ -59,6 +59,7 @@ class KhachHang extends CI_Controller {
 		}
 
 		$data['detail'] = $this->Model_KhachHang->getById($makhachhang);
+		$data['title'] = "Thông tin khách hàng";
 		return $this->load->view('Admin/View_XemKhachHang', $data);
 	}
 

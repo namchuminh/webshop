@@ -196,16 +196,31 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="<?php echo base_url('ca-nhan/'); ?>" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fa-solid fa-image"></i>
               <p>
                 Giao Diện
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo base_url('admin/giao-dien/') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh Sách</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('admin/giao-dien/them/') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Thêm Mới</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-header">CÁ NHÂN</li>
           <li class="nav-item has-treeview">
-            <a href="<?php echo base_url('ca-nhan/'); ?>" class="nav-link">
+            <a href="<?php echo base_url('admin/ca-nhan/'); ?>" class="nav-link">
               <i class="nav-icon fa-solid fa-lock"></i>
               <p>
                 Đổi Thông Tin
