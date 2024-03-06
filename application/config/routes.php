@@ -42,3 +42,9 @@ $route['admin/khach-hang/(:any)/trang-thai'] = 'Admin/KhachHang/status/$1';
 
 
 $route['admin/ca-nhan'] = 'Admin/CaNhan';
+
+$route['admin/giao-dien'] = 'Admin/GiaoDien';
+$route['admin/giao-dien/(:any)/trang'] = 'Admin/GiaoDien/page/$1';
+$route['admin/giao-dien/them'] = 'Admin/GiaoDien/add';
+$route['admin/giao-dien/(:any)/sua'] = 'Admin/GiaoDien/update/$1';
+$route['admin/giao-dien/(:any)/xoa'] = 'Admin/GiaoDien/delete/$1';

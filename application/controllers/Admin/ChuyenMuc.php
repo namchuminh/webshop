@@ -20,12 +20,12 @@ class ChuyenMuc extends CI_Controller {
 
 		$data['totalPages'] = $totalPages;
 		$data['list'] = $this->Model_ChuyenMuc->getAll();
-		$data['title'] = "Chuyên mục sản phẩm!";
+		$data['title'] = "Chuyên mục sản phẩm";
 		return $this->load->view('Admin/View_ChuyenMuc', $data);
 	}
 
 	public function page($trang){
-		$data['title'] = "Chuyên mục sản phẩm!";
+		$data['title'] = "Chuyên mục sản phẩm";
 		$totalRecords = $this->Model_ChuyenMuc->checkNumber();
 		$recordsPerPage = 10;
 		$totalPages = ceil($totalRecords / $recordsPerPage); 
@@ -55,7 +55,7 @@ class ChuyenMuc extends CI_Controller {
 
 	public function add()
 	{
-		$data['title'] = "Thêm chuyên mục sản phẩm!";
+		$data['title'] = "Thêm chuyên mục sản phẩm";
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$tenchuyenmuc = $this->input->post('tenchuyenmuc');
 			$duongdan = $this->input->post('duongdan');
@@ -94,7 +94,7 @@ class ChuyenMuc extends CI_Controller {
 			return redirect(base_url('admin/chuyen-muc/'));
 		}
 
-		$data['title'] = "Cập nhật chuyên mục sản phẩm!";
+		$data['title'] = "Cập nhật chuyên mục sản phẩm";
 		$data['detail'] = $this->Model_ChuyenMuc->getById($machuyenmuc);
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$tenchuyenmuc = $this->input->post('tenchuyenmuc');
