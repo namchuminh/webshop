@@ -48,3 +48,7 @@ $route['admin/giao-dien/(:any)/trang'] = 'Admin/GiaoDien/page/$1';
 $route['admin/giao-dien/them'] = 'Admin/GiaoDien/add';
 $route['admin/giao-dien/(:any)/sua'] = 'Admin/GiaoDien/update/$1';
 $route['admin/giao-dien/(:any)/xoa'] = 'Admin/GiaoDien/delete/$1';
+
+$route['admin/don-hang'] = 'Admin/DonHang';
+$route['admin/don-hang/(:any)/trang'] = 'Admin/DonHang/page/$1';
+$route['admin/don-hang/(:any)/xem'] = 'Admin/DonHang/update/$1';

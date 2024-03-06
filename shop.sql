@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2024 at 12:52 PM
+-- Generation Time: Mar 06, 2024 at 08:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cauhinh` (
   `TenWebsite` varchar(255) NOT NULL,
+  `MoTaWeb` text NOT NULL,
   `Logo` text NOT NULL,
   `DiaChi` text NOT NULL,
   `Email` varchar(255) NOT NULL,
@@ -36,6 +37,13 @@ CREATE TABLE `cauhinh` (
   `PhiShip` int(11) NOT NULL,
   `MienPhiShip` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `cauhinh`
+--
+
+INSERT INTO `cauhinh` (`TenWebsite`, `MoTaWeb`, `Logo`, `DiaChi`, `Email`, `SoDienThoai`, `PhiShip`, `MienPhiShip`) VALUES
+('Cửa hàng ABC', 'ABCDE', 'http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d81.jpg', 'Hà Nội', 'lienhe@gmail.com', '0379962045', 30000, 50000);
 
 -- --------------------------------------------------------
 
@@ -71,6 +79,29 @@ CREATE TABLE `chuyenmuc` (
 INSERT INTO `chuyenmuc` (`MaChuyenMuc`, `TenChuyenMuc`, `DuongDan`, `HinhAnh`, `TrangThai`) VALUES
 (1, 'Chuyên mục số 1', 'chuyen-muc-so-1', 'http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e.jpg', 1),
 (2, 'Chuyên mục số 2', 'chuyen-muc-so-2', 'http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b25.jpg', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `giaodien`
+--
+
+CREATE TABLE `giaodien` (
+  `MaGiaoDien` int(11) NOT NULL,
+  `MaChuyenMuc` int(11) NOT NULL,
+  `HinhAnh` text NOT NULL,
+  `LoaiGiaoDien` int(11) NOT NULL,
+  `TrangThai` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `giaodien`
+--
+
+INSERT INTO `giaodien` (`MaGiaoDien`, `MaChuyenMuc`, `HinhAnh`, `LoaiGiaoDien`, `TrangThai`) VALUES
+(1, 2, 'http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b254.jpg', 1, 1),
+(2, 2, 'http://localhost/webshop/uploads/z4617362745335_4456bfd0f397a69bb165e385ba8916cb.jpg', 2, 1),
+(3, 2, 'http://localhost/webshop/uploads/z4617362741623_98c0302df70bfe02dd581fa8a0e35aa61.jpg', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -112,7 +143,8 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`MaKhachHang`, `HoTen`, `TaiKhoan`, `MatKhau`, `SoDienThoai`, `Email`, `DiaChi`, `NgayThamGia`, `TrangThai`) VALUES
-(1, 'Nguyễn Văn Test', 'test', '21232f297a57a5a743894a0e4a801fc3', '0999888999', 'nguyenvantest@gmail.com', 'Hà Nội', '2024-03-05 18:35:52', 1);
+(1, 'Nguyễn Văn Test', 'test', '21232f297a57a5a743894a0e4a801fc3', '0999888999', 'nguyenvantest@gmail.com', 'Hà Nội', '2024-03-05 18:35:52', 1),
+(2, 'Nguyễn Văn Bình', 'nguyenvanb', '21232f297a57a5a743894a0e4a801fc3', '0999888999', 'nguyenvanb@gmail.com', 'Hà Nội', '2024-03-05 20:40:51', 1);
 
 -- --------------------------------------------------------
 
@@ -185,6 +217,8 @@ CREATE TABLE `nhanvien` (
   `HoTen` varchar(255) NOT NULL,
   `TaiKhoan` varchar(255) NOT NULL,
   `MatKhau` varchar(255) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `SoDienThoai` varchar(11) NOT NULL,
   `TrangThai` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -192,8 +226,8 @@ CREATE TABLE `nhanvien` (
 -- Dumping data for table `nhanvien`
 --
 
-INSERT INTO `nhanvien` (`MaNhanVien`, `HoTen`, `TaiKhoan`, `MatKhau`, `TrangThai`) VALUES
-(1, 'Nguyễn Văn An', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1);
+INSERT INTO `nhanvien` (`MaNhanVien`, `HoTen`, `TaiKhoan`, `MatKhau`, `Email`, `SoDienThoai`, `TrangThai`) VALUES
+(1, 'Nguyễn Văn An', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'nguyenvana@gmail.com', '0998999888', 1);
 
 -- --------------------------------------------------------
 
@@ -261,6 +295,13 @@ ALTER TABLE `chitiethoadon`
 --
 ALTER TABLE `chuyenmuc`
   ADD PRIMARY KEY (`MaChuyenMuc`);
+
+--
+-- Indexes for table `giaodien`
+--
+ALTER TABLE `giaodien`
+  ADD PRIMARY KEY (`MaGiaoDien`),
+  ADD KEY `MaChuyenMuc` (`MaChuyenMuc`);
 
 --
 -- Indexes for table `hoadon`
@@ -334,6 +375,12 @@ ALTER TABLE `chuyenmuc`
   MODIFY `MaChuyenMuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `giaodien`
+--
+ALTER TABLE `giaodien`
+  MODIFY `MaGiaoDien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
@@ -343,7 +390,7 @@ ALTER TABLE `hoadon`
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `MaKhachHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MaKhachHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `lichsunhap`
@@ -391,6 +438,12 @@ ALTER TABLE `tintuc`
 ALTER TABLE `chitiethoadon`
   ADD CONSTRAINT `chitiethoadon_ibfk_1` FOREIGN KEY (`MaSanPham`) REFERENCES `sanpham` (`MaSanPham`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `chitiethoadon_ibfk_2` FOREIGN KEY (`MaHoaDon`) REFERENCES `hoadon` (`MaHoaDon`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `giaodien`
+--
+ALTER TABLE `giaodien`
+  ADD CONSTRAINT `giaodien_ibfk_1` FOREIGN KEY (`MaChuyenMuc`) REFERENCES `chuyenmuc` (`MaChuyenMuc`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `hoadon`
