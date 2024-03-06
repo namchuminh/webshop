@@ -171,7 +171,7 @@
           </li>
           <li class="nav-header">QUẢN LÝ ĐƠN HÀNG</li>
           <li class="nav-item has-treeview">
-            <a href="<?php echo base_url('ca-nhan/'); ?>" class="nav-link">
+            <a href="<?php echo base_url('admin/hoa-don/'); ?>" class="nav-link">
               <i class="nav-icon fa-solid fa-cart-shopping"></i>
               <p>
                 Đơn Hàng

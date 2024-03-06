@@ -49,6 +49,10 @@ $route['admin/giao-dien/them'] = 'Admin/GiaoDien/add';
 $route['admin/giao-dien/(:any)/sua'] = 'Admin/GiaoDien/update/$1';
 $route['admin/giao-dien/(:any)/xoa'] = 'Admin/GiaoDien/delete/$1';
 
-$route['admin/don-hang'] = 'Admin/DonHang';
-$route['admin/don-hang/(:any)/trang'] = 'Admin/DonHang/page/$1';
-$route['admin/don-hang/(:any)/xem'] = 'Admin/DonHang/update/$1';
+$route['admin/hoa-don'] = 'Admin/HoaDon';
+$route['admin/hoa-don/(:any)/trang'] = 'Admin/HoaDon/page/$1';
+$route['admin/hoa-don/(:any)/xem'] = 'Admin/HoaDon/view/$1';
+$route['admin/hoa-don/(:any)/thanh-toan'] = 'Admin/HoaDon/pay/$1';
+$route['admin/hoa-don/(:any)/huy'] = 'Admin/HoaDon/cancel/$1';
+$route['admin/hoa-don/(:any)/trang-thai'] = 'Admin/HoaDon/status/$1';
+
