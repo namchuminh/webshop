@@ -56,3 +56,8 @@ $route['admin/hoa-don/(:any)/thanh-toan'] = 'Admin/HoaDon/pay/$1';
 $route['admin/hoa-don/(:any)/huy'] = 'Admin/HoaDon/cancel/$1';
 $route['admin/hoa-don/(:any)/trang-thai'] = 'Admin/HoaDon/status/$1';
 
+$route['admin/san-pham'] = 'Admin/SanPham';
+$route['admin/san-pham/(:any)/trang'] = 'Admin/SanPham/page/$1';
+$route['admin/san-pham/them'] = 'Admin/SanPham/add';
+$route['admin/san-pham/(:any)/sua'] = 'Admin/SanPham/update/$1';
+$route['admin/san-pham/(:any)/xoa'] = 'Admin/SanPham/delete/$1';
