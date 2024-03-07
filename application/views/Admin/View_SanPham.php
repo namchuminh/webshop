@@ -37,6 +37,7 @@
                       <th>Giá Bán</th>
                       <th>Số Lượng</th>
                       <th>Loại Sản Phẩm</th>
+                      <th>Nhập Số Lượng</th>
                       <th>Hành Động</th>
                     </tr>
                   </thead>
@@ -60,6 +61,16 @@
                           <?php }else if($value['LoaiSanPham'] == 4){ ?>
                             Đang Hot
                           <?php } ?>
+                        </td>
+                        <td>
+                          <a href="<?php echo base_url('admin/san-pham/'.$value['MaSanPham'].'/nhap/'); ?>" class="btn btn-success" style="color: white;">
+                            <i class="fa-solid fa-plus"></i>
+                              <span>NHẬP SỐ LƯỢNG</span>
+                            </a>
+                          <a href="<?php echo base_url('admin/san-pham/'.$value['MaSanPham'].'/lich-su/'); ?>" class="btn btn-info" style="color: white;">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                              <span>LỊCH SỬ NHẬP</span>
+                            </a>
                         </td>
 	                      <td>
 	                      	<a href="<?php echo base_url('admin/san-pham/'.$value['MaSanPham'].'/sua/'); ?>" class="btn btn-primary" style="color: white;">

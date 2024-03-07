@@ -62,6 +62,33 @@ class Model_SanPham extends CI_Model {
 		return $result;
 	}
 
+	public function import($soluong,$MaSanPham){
+		$sql = "UPDATE sanpham SET SoLuong = ? WHERE MaSanPham = ?";
+		$result = $this->db->query($sql, array($soluong,$MaSanPham));
+		return $result;
+	}
+
+	public function history($masanpham,$manhanvien,$soluongcu,$soluongmoi){
+		$data = array(
+	        "MaSanPham" => $masanpham,
+	        "MaNhanVien" => $manhanvien,
+	        "SoLuongCu" => $soluongcu,
+	        "SoLuongMoi" => $soluongmoi
+	    );
+
+	    $this->db->insert('lichsunhap', $data);
+	    $lastInsertedId = $this->db->insert_id();
+
+	    return $lastInsertedId;
+	}
+
+
+	public function getHistory($masanpham){
+		$sql = "SELECT sanpham.TenSanPham, nhanvien.HoTen, lichsunhap.* FROM sanpham, nhanvien, lichsunhap WHERE lichsunhap.MaNhanVien = nhanvien.MaNhanVien AND lichsunhap.MaSanPham = sanpham.MaSanPham AND lichsunhap.MaSanPham = ? ORDER BY lichsunhap.MaLichSuNhap DESC";
+		$result = $this->db->query($sql, array($masanpham));
+		return $result->result_array();
+	}
+
 }
 
 /* End of file Model_ChuyenMuc.php */

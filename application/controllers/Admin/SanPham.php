@@ -251,6 +251,60 @@ class SanPham extends CI_Controller {
 		$this->session->set_flashdata('success', 'Xóa sản phẩm thành công!');
 		return redirect(base_url('admin/san-pham/'));
 	}
+
+	public function import($masanpham){
+		if(count($this->Model_SanPham->getById($masanpham)) <= 0){
+			$this->session->set_flashdata('error', 'Sản phẩm không tồn tại!');
+			return redirect(base_url('admin/san-pham/'));
+		}
+
+		$data['title'] = "Nhập số lượng sản phẩm";
+		$data['detail'] = $this->Model_SanPham->getById($masanpham);
+		$data['category'] = $this->Model_ChuyenMuc->getAll();
+		if ($this->input->server('REQUEST_METHOD') === 'POST') {
+			$soluongnhap = $this->input->post('soluongnhap');
+
+			if(empty($soluongnhap)){
+				$data['error'] = "Vui lòng nhập đủ thông tin!";
+				return $this->load->view('Admin/View_NhapSanPham', $data);
+			}
+
+			if(!is_numeric($soluongnhap) || ($soluongnhap <= 0)){
+				$data['error'] = "Số lượng nhập phải là kiểu số và lớn hơn 0!";
+				return $this->load->view('Admin/View_NhapSanPham', $data);
+			}
+
+			$soluongcu = $this->Model_SanPham->getById($masanpham)[0]['SoLuong'];
+
+			$soluongmoi = $soluongcu + $soluongnhap;
+
+			$this->Model_SanPham->import($soluongmoi,$masanpham);
+
+			$this->Model_SanPham->history($masanpham,$this->session->userdata('manhanvien'),$soluongcu,$soluongmoi);
+
+			$data['success'] = "Nhập thêm số lượng sản phẩm thành công!";
+			return $this->load->view('Admin/View_NhapSanPham', $data);
+		}
+
+		return $this->load->view('Admin/View_NhapSanPham', $data);
+	}
+
+	public function history($masanpham){
+		if(count($this->Model_SanPham->getById($masanpham)) <= 0){
+			$this->session->set_flashdata('error', 'Sản phẩm không tồn tại!');
+			return redirect(base_url('admin/san-pham/'));
+		}
+
+		if(count($this->Model_SanPham->getHistory($masanpham)) <= 0){
+			$this->session->set_flashdata('error', 'Sản phẩm chưa có lịch sử nhập!');
+			return redirect(base_url('admin/san-pham/'));
+		}
+
+		$data['title'] = "Lịch sử nhập sản phẩm";
+		$data['list'] = $this->Model_SanPham->getHistory($masanpham);
+
+		return $this->load->view('Admin/View_LichSuNhapSanPham', $data);
+	}
 }
 
 /* End of file SanPham.php */
