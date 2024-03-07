@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'TrangChu';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
-$route['admin'] = 'Admin/Home';
+$route['admin'] = 'Admin/TrangChu';
 
 $route['admin/dang-nhap'] = 'Admin/DangNhap/index';
 $route['admin/dang-xuat'] = 'Admin/DangXuat/index';
