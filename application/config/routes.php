@@ -67,6 +67,7 @@ $route['admin/san-pham/(:any)/lich-su'] = 'Admin/SanPham/history/$1';
 
 $route['san-pham'] = 'Web/SanPham/index';
 $route['san-pham/(:any)'] = 'Web/SanPham/detail/$1';
+$route['san-pham/trang/(:any)'] = 'Web/SanPham/page/$1';
 
 
 

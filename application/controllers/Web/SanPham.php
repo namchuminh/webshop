@@ -11,7 +11,54 @@ class SanPham extends MY_Controller {
 
 	public function index()
 	{
+		$data['title'] = "Danh sách sản phẩm";
+		$data['banner1'] = $this->Model_GiaoDien->getByType(2);
+		$data['new'] = $this->Model_SanPham->getByType(1);
+		$data['sale'] = $this->Model_SanPham->getByType(2);
+		$data['popular'] = $this->Model_SanPham->getByType(3);
+		$data['categoryNumber'] = $this->Model_SanPham->getCategoryNumber();
+
+		$totalRecords = $this->Model_SanPham->checkNumber();
+		$recordsPerPage = 9;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+		$data['totalPages'] = $totalPages;
+		$data['list'] = $this->Model_SanPham->getAll();
+
+		return $this->load->view('Web/View_SanPham', $data);
+	}
+
+	public function page($trang){
+		$data['title'] = "Danh sách sản phẩm";
+		$data['banner1'] = $this->Model_GiaoDien->getByType(2);
+		$data['new'] = $this->Model_SanPham->getByType(1);
+		$data['sale'] = $this->Model_SanPham->getByType(2);
+		$data['popular'] = $this->Model_SanPham->getByType(3);
+		$data['categoryNumber'] = $this->Model_SanPham->getCategoryNumber();
 		
+		$totalRecords = $this->Model_SanPham->checkNumber();
+		$recordsPerPage = 9;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+		if($trang < 1){
+			return redirect(base_url('san-pham/'));
+		}
+
+		if($trang > $totalPages){
+			return redirect(base_url('san-pham/'));
+		}
+
+		$start = ($trang - 1) * $recordsPerPage;
+
+
+		if($start == 0){
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_SanPham->getAll();
+			return $this->load->view('Web/View_SanPham', $data);
+		}else{
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_SanPham->getAll($start);
+			return $this->load->view('Web/View_SanPham', $data);
+		}
 	}
 
 	public function detail($duongdan){
@@ -22,7 +69,7 @@ class SanPham extends MY_Controller {
 
 		$data['title'] = $this->Model_SanPham->getBySlug($duongdan)[0]['TenSanPham'];
 		$data['detail'] = $this->Model_SanPham->getBySlug($duongdan);
-		$data['categoryProduct'] = $this->Model_SanPham->getByCategory($this->Model_SanPham->getBySlug($duongdan)[0]['MaChuyenMuc']);
+		$data['categoryProduct'] = $this->Model_SanPham->getByCategory($this->Model_SanPham->getBySlug($duongdan)[0]['MaChuyenMuc'],$this->Model_SanPham->getBySlug($duongdan)[0]['MaSanPham']);
 		$data['banner1'] = $this->Model_GiaoDien->getByType(2);
 		$data['new'] = $this->Model_SanPham->getByType(1);
 		$data['sale'] = $this->Model_SanPham->getByType(2);

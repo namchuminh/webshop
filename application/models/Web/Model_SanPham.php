@@ -17,7 +17,7 @@ class Model_SanPham extends CI_Model {
 		return $result->num_rows();
 	}
 
-	public function getAll($start = 0, $end = 10){
+	public function getAll($start = 0, $end = 9){
 		$sql = "SELECT sanpham.*, chuyenmuc.TenChuyenMuc, chuyenmuc.MaChuyenMuc FROM sanpham, chuyenmuc WHERE sanpham.MaChuyenMuc = chuyenmuc.MaChuyenMuc AND sanpham.TrangThai = 1 ORDER BY sanpham.MaSanPham DESC LIMIT ?, ?";
 		$result = $this->db->query($sql, array($start, $end));
 		return $result->result_array();
@@ -29,9 +29,9 @@ class Model_SanPham extends CI_Model {
 		return $result->result_array();
 	}
 
-	public function getByCategory($MaChuyenMuc){
-		$sql = "SELECT * FROM sanpham WHERE MaChuyenMuc = ? AND TrangThai = 1";
-		$result = $this->db->query($sql, array($MaChuyenMuc));
+	public function getByCategory($MaChuyenMuc,$MaSanPham){
+		$sql = "SELECT * FROM sanpham WHERE MaChuyenMuc = ? AND TrangThai = 1 AND MaSanPham != ? ORDER BY RAND() LIMIT 9";
+		$result = $this->db->query($sql, array($MaChuyenMuc,$MaSanPham));
 		return $result->result_array();
 	}
 
