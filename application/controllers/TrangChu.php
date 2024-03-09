@@ -23,7 +23,6 @@ class TrangChu extends MY_Controller {
 		$data['popular'] = $this->Model_SanPham->getByType(3);
 		$data['hot'] = $this->Model_SanPham->getByType(4);
 		$data['suggest'] = $this->Model_SanPham->getSuggest();
-		$data['image'] = $this->Model_SanPham->getImage();
 		$data['category'] = $this->Model_ChuyenMuc->getAll();
 		return $this->load->view('Web/View_TrangChu', $data);
 	}

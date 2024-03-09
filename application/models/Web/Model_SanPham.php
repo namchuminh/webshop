@@ -23,9 +23,21 @@ class Model_SanPham extends CI_Model {
 		return $result->result_array();
 	}
 
-	public function getById($MaSanPham){
-		$sql = "SELECT * FROM sanpham WHERE MaSanPham = ? AND TrangThai = 1";
-		$result = $this->db->query($sql, array($MaSanPham));
+	public function getBySlug($DuongDan){
+		$sql = "SELECT sanpham.*, chuyenmuc.TenChuyenMuc, chuyenmuc.DuongDan AS DuongDanChuyenMuc FROM sanpham, chuyenmuc WHERE sanpham.MaChuyenMuc = chuyenmuc.MaChuyenMuc AND sanpham.DuongDan = ? AND sanpham.TrangThai = 1";
+		$result = $this->db->query($sql, array($DuongDan));
+		return $result->result_array();
+	}
+
+	public function getByCategory($MaChuyenMuc){
+		$sql = "SELECT * FROM sanpham WHERE MaChuyenMuc = ? AND TrangThai = 1";
+		$result = $this->db->query($sql, array($MaChuyenMuc));
+		return $result->result_array();
+	}
+
+	public function getCategoryNumber(){
+		$sql = "SELECT cm.TenChuyenMuc, cm.DuongDan AS DuongDanChuyenMuc, COUNT(sp.MaSanPham) AS SoLuongSanPham FROM chuyenmuc cm LEFT JOIN sanpham sp ON cm.MaChuyenMuc = sp.MaChuyenMuc WHERE cm.TrangThai = 1 GROUP BY cm.TenChuyenMuc, cm.DuongDan;";
+		$result = $this->db->query($sql);
 		return $result->result_array();
 	}
 
@@ -37,13 +49,19 @@ class Model_SanPham extends CI_Model {
 	}
 
 	public function getSuggest(){
-		$sql = "SELECT * FROM sanpham WHERE TrangThai = 1 ORDER BY RAND() DESC LIMIT 9";
+		$sql = "SELECT * FROM sanpham WHERE TrangThai = 1 ORDER BY RAND() LIMIT 9";
 		$result = $this->db->query($sql);
 		return $result->result_array();
 	}
 
 	public function getImage(){
 		$sql = "SELECT * FROM sanpham WHERE TrangThai = 1 ORDER BY RAND() DESC LIMIT 8";
+		$result = $this->db->query($sql);
+		return $result->result_array();
+	}
+
+	public function getTag(){
+		$sql = "SELECT The FROM sanpham WHERE TrangThai = 1 ORDER BY RAND()";
 		$result = $this->db->query($sql);
 		return $result->result_array();
 	}

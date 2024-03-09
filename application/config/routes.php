@@ -63,3 +63,10 @@ $route['admin/san-pham/(:any)/sua'] = 'Admin/SanPham/update/$1';
 $route['admin/san-pham/(:any)/xoa'] = 'Admin/SanPham/delete/$1';
 $route['admin/san-pham/(:any)/nhap'] = 'Admin/SanPham/import/$1';
 $route['admin/san-pham/(:any)/lich-su'] = 'Admin/SanPham/history/$1';
+
+
+$route['san-pham'] = 'Web/SanPham/index';
+$route['san-pham/(:any)'] = 'Web/SanPham/detail/$1';
+
+
+
