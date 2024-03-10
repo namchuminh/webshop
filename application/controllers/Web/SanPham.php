@@ -18,6 +18,12 @@ class SanPham extends MY_Controller {
 		$data['popular'] = $this->Model_SanPham->getByType(3);
 		$data['categoryNumber'] = $this->Model_SanPham->getCategoryNumber();
 
+		if(isset($_GET['s']) && !empty($_GET['s'])){
+			$data['totalPages'] = 0;
+			$data['list'] = $this->Model_SanPham->search($_GET['s']);
+			return $this->load->view('Web/View_SanPham', $data);
+		}
+
 		$totalRecords = $this->Model_SanPham->checkNumber();
 		$recordsPerPage = 9;
 		$totalPages = ceil($totalRecords / $recordsPerPage); 

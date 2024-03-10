@@ -73,14 +73,14 @@
     <div class="middle-header dark_skin">
     	<div class="custom-container">
         	<div class="nav_block">
-                <a class="navbar-brand" href="index.html">
-                    <img class="logo_light" src="assets/images/logo_light.png" alt="logo" />
-                    <img class="logo_dark" src="assets/images/logo_dark.png" alt="logo" />
+                <a class="navbar-brand" href="<?php echo base_url(); ?>">
+                    <img class="logo_light" src="<?php echo $config[0]['Logo'] ?>" alt="logo" />
+                    <img class="logo_dark" src="<?php echo $config[0]['Logo'] ?>" alt="logo" />
                 </a>
                 <div class="product_search_form rounded_input">
-                    <form>
+                    <form action="<?php echo base_url('san-pham/') ?>">
                         <div class="input-group">
-                            <input class="form-control" placeholder="Nhập tên sản phẩm ..." required=""  type="text">
+                            <input class="form-control" placeholder="Nhập tên sản phẩm ..." required="" name="s" type="text">
                             <button type="submit" class="search_btn3"><i class="fa fa-search"></i></button>
                         </div>
                     </form>

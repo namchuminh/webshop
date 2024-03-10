@@ -69,5 +69,14 @@ $route['san-pham'] = 'Web/SanPham/index';
 $route['san-pham/(:any)'] = 'Web/SanPham/detail/$1';
 $route['san-pham/trang/(:any)'] = 'Web/SanPham/page/$1';
 
+$route['tin-tuc'] = 'Web/TinTuc/index';
+$route['tin-tuc/(:any)'] = 'Web/TinTuc/detail/$1';
+$route['tin-tuc/trang/(:any)'] = 'Web/TinTuc/page/$1';
+
+$route['chuyen-muc'] = 'Web/ChuyenMuc/index';
+$route['chuyen-muc/(:any)'] = 'Web/ChuyenMuc/detail/$1';
+$route['chuyen-muc/trang/(:any)'] = 'Web/ChuyenMuc/page/$1';
+$route['chuyen-muc/(:any)/trang/(:any)'] = 'Web/ChuyenMuc/detailPage/$1/$2';
+
 
 

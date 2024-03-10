@@ -66,6 +66,13 @@ class Model_SanPham extends CI_Model {
 		return $result->result_array();
 	}
 
+
+	public function search($TenSanPham){
+		$TenSanPham = '%'.$TenSanPham.'%';
+		$sql = "SELECT * FROM sanpham WHERE TrangThai = 1 AND TenSanPham LIKE ?";
+		$result = $this->db->query($sql, array($TenSanPham));
+		return $result->result_array();
+	}
 }
 
 /* End of file Model_ChuyenMuc.php */
