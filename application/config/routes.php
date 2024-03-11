@@ -78,5 +78,11 @@ $route['chuyen-muc/(:any)'] = 'Web/ChuyenMuc/detail/$1';
 $route['chuyen-muc/trang/(:any)'] = 'Web/ChuyenMuc/page/$1';
 $route['chuyen-muc/(:any)/trang/(:any)'] = 'Web/ChuyenMuc/detailPage/$1/$2';
 
+$route['lien-he'] = 'Web/LienHe';
+$route['dang-nhap'] = 'Web/DangNhap';
+$route['dang-xuat'] = 'Web/DangXuat';
+$route['dang-ky'] = 'Web/DangNhap/register';
+
+
 
 

@@ -171,14 +171,15 @@
                             <?php endforeach ?>
                         </ul>
                     </div>
-                    <div class="widget">
-                        <div class="shop_banner">
-                            <a href="<?php echo base_url('chuyen-muc/'.$banner1[0]['DuongDan'].'/'); ?>" class="banner_img">
-                                <img style="width: 255px; height: 350px;" src="<?php echo $banner1[0]['HinhAnh'] ?>" alt="sidebar_banner_img">
-                            </a> 
+                    <?php if(count($banner1) >= 1){ ?>
+                        <div class="widget">
+                            <div class="shop_banner">
+                                <a href="<?php echo base_url('chuyen-muc/'.$banner1[0]['DuongDan'].'/'); ?>" class="banner_img">
+                                    <img style="width: 255px; height: 350px;" src="<?php echo $banner1[0]['HinhAnh'] ?>" alt="sidebar_banner_img">
+                                </a> 
+                            </div>
                         </div>
-                    </div>
-                    
+                    <?php } ?>
                 </div>
             </div>
         </div>

@@ -60,12 +60,21 @@
                 </div>
                 <div class="col-lg-6 col-md-4">
                     <div class="d-flex align-items-center justify-content-center justify-content-md-end">
-                        <div class="header_offer">
-                            <a href="http://localhost/webshop/dang-nhap/" style="color: white;">Đăng Nhập</a>
-                        </div>
-                        <div class="download_wrap">
-                            <a href="http://localhost/webshop/dang-ky/" style="color: white;">Đăng Ký</a>
-                        </div>
+                        <?php if(isset($_SESSION['khachhang'])){ ?>
+                            <div class="header_offer">
+                                <a href="<?php echo base_url('khach-hang/'); ?>" style="color: white;"><?php echo $_SESSION['hoten']; ?></a>
+                            </div>
+                            <div class="download_wrap">
+                                <a href="<?php echo base_url('dang-xuat/'); ?>" style="color: white;">Đăng Xuất</a>
+                            </div>
+                        <?php }else{ ?>
+                            <div class="header_offer">
+                                <a href="<?php echo base_url('dang-nhap/'); ?>" style="color: white;">Đăng Nhập</a>
+                            </div>
+                            <div class="download_wrap">
+                                <a href="<?php echo base_url('dang-ky/'); ?>" style="color: white;">Đăng Ký</a>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
