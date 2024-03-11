@@ -137,7 +137,7 @@
                         <div class="widget">
                             <div class="shop_banner">
                                 <a href="<?php echo base_url('chuyen-muc/'.$banner1[0]['DuongDan'].'/'); ?>" class="banner_img">
-                                    <img style="width: 255px; height: 350px;" src="<?php echo $banner1[0]['HinhAnh'] ?>" alt="sidebar_banner_img">
+                                    <img style="height: 350px;" src="<?php echo $banner1[0]['HinhAnh'] ?>" alt="sidebar_banner_img">
                                 </a> 
                             </div>
                         </div>
@@ -164,6 +164,7 @@
 		display: block;
         margin-left: auto;
         margin-right: auto;
-        width: 50%;
+        width: 100%;
+        height: 100%;
 	}
 </style>

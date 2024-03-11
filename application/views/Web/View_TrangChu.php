@@ -257,8 +257,8 @@
                                     <div class="product_wrap">
                                         <div class="product_img">
                                             <a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/') ?>">
-                                                <img src="<?php echo $value['AnhChinh']; ?>" alt="el_img2" style="width: 277px; height: 308px;">
-                                                <img class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2" style="width: 277px; height: 308px;">
+                                                <img src="<?php echo $value['AnhChinh']; ?>" alt="el_img2" style="height: 308px;">
+                                                <img class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2" style="height: 308px;">
                                             </a>
                                             <div class="product_action_box">
                                                 <ul class="list_none pr_action_btn">
@@ -345,7 +345,7 @@
                 <div class="col-xl-3 d-none d-xl-block">
                     <div class="sale-banner">
                         <a class="hover_effect1" href="<?php echo base_url('chuyen-muc/'.$banner3[0]['DuongDan'].'/') ?>">
-                            <img src="<?php echo $banner3[0]['HinhAnh']; ?>" style="width: 387px; height: 538px;">
+                            <img src="<?php echo $banner3[0]['HinhAnh']; ?>" style="height: 538px;">
                         </a>
                     </div>
                 </div>
@@ -372,8 +372,8 @@
                                     <div class="product_wrap">
                                         <div class="product_img">
                                             <a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/') ?>">
-                                                <img src="<?php echo $value['AnhChinh']; ?>" alt="el_img2" style="width: 277px; height: 308px;">
-                                                <img class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2" style="width: 277px; height: 308px;">
+                                                <img src="<?php echo $value['AnhChinh']; ?>" alt="el_img2" style="height: 308px;">
+                                                <img class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2" style="height: 308px;">
                                             </a>
                                             <div class="product_action_box">
                                                 <ul class="list_none pr_action_btn">
@@ -437,8 +437,8 @@
                                             <div class="product_wrap">
                                                 <div class="product_img">
                                                     <a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/') ?>">
-                                                        <img style="width: 145px; height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
-                                                        <img style="width: 145px; height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
+                                                        <img style="height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
+                                                        <img style="height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
                                                     </a>
                                                 </div>
                                                 <div class="product_info">
@@ -472,8 +472,8 @@
                                                     <div class="product_wrap">
                                                         <div class="product_img">
                                                             <a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/') ?>">
-                                                                <img style="width: 145px; height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
-                                                                <img style="width: 145px; height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
+                                                                <img style="height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
+                                                                <img style="height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
                                                             </a>
                                                         </div>
                                                         <div class="product_info">
@@ -510,8 +510,8 @@
                                                     <div class="product_wrap">
                                                         <div class="product_img">
                                                             <a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/') ?>">
-                                                                <img style="width: 145px; height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
-                                                                <img style="width: 145px; height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
+                                                                <img style="height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
+                                                                <img style="height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
                                                             </a>
                                                         </div>
                                                         <div class="product_info">
@@ -566,8 +566,8 @@
                                             <div class="product_wrap">
                                                 <div class="product_img">
                                                     <a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/') ?>">
-                                                        <img style="width: 145px; height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
-                                                        <img style="width: 145px; height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
+                                                        <img style="height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
+                                                        <img style="height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
                                                     </a>
                                                 </div>
                                                 <div class="product_info">
@@ -601,8 +601,8 @@
                                                     <div class="product_wrap">
                                                         <div class="product_img">
                                                             <a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/') ?>">
-                                                                <img style="width: 145px; height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
-                                                                <img style="width: 145px; height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
+                                                                <img style="height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
+                                                                <img style="height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
                                                             </a>
                                                         </div>
                                                         <div class="product_info">
@@ -639,8 +639,8 @@
                                                     <div class="product_wrap">
                                                         <div class="product_img">
                                                             <a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/') ?>">
-                                                                <img style="width: 145px; height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
-                                                                <img style="width: 145px; height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
+                                                                <img style="height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
+                                                                <img style="height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
                                                             </a>
                                                         </div>
                                                         <div class="product_info">
@@ -693,8 +693,8 @@
                                             <div class="product_wrap">
                                                 <div class="product_img">
                                                     <a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/') ?>">
-                                                        <img style="width: 145px; height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
-                                                        <img style="width: 145px; height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
+                                                        <img style="height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
+                                                        <img style="height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
                                                     </a>
                                                 </div>
                                                 <div class="product_info">
@@ -728,8 +728,8 @@
                                                     <div class="product_wrap">
                                                         <div class="product_img">
                                                             <a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/') ?>">
-                                                                <img style="width: 145px; height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
-                                                                <img style="width: 145px; height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
+                                                                <img style="height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
+                                                                <img style="height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
                                                             </a>
                                                         </div>
                                                         <div class="product_info">
@@ -766,8 +766,8 @@
                                                     <div class="product_wrap">
                                                         <div class="product_img">
                                                             <a href="<?php echo base_url('san-pham/'.$value['DuongDan'].'/') ?>">
-                                                                <img style="width: 145px; height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
-                                                                <img style="width: 145px; height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
+                                                                <img style="height: 161px;" src="<?php echo $value['AnhChinh']; ?>" alt="el_img2">
+                                                                <img style="height: 161px;" class="product_hover_img" src="<?php echo explode('#', $value['HinhAnh'])[0]; ?>" alt="el_hover_img2">
                                                             </a>
                                                         </div>
                                                         <div class="product_info">

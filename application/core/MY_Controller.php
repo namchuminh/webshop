@@ -12,6 +12,7 @@ class MY_Controller extends CI_Controller {
         $this->data['config'] = $this->Model_CauHinh->getAll();
         $this->data['category'] = $this->Model_ChuyenMuc->getAll();
         $this->load->vars($this->data);
+
         //Logout customer is deactive
         if($this->session->has_userdata('khachhang')){
             if($this->Model_DangNhap->checkAccountBlock($this->session->userdata('khachhang')) >= 1){

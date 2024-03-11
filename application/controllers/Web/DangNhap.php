@@ -45,6 +45,11 @@ class DangNhap extends MY_Controller {
 					    'diachi' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['DiaChi']
 					);
 					$this->session->set_userdata($newdata);
+
+					if($this->session->has_userdata('lienhe')){
+			            return redirect(base_url('lien-he/'));
+			        }
+					
 					return redirect(base_url('khach-hang/'));
 				}
 				

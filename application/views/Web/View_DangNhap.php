@@ -32,6 +32,9 @@
                             <?php if(isset($error)){ ?>
                                 <p class="text-center" style="color: #ff324d;"><?php echo $error; ?></p>
                             <?php } ?>
+                            <?php if(isset($_SESSION['redirect'])){ ?>
+                                <p class="text-center" style="color: #ff324d;"><?php echo $_SESSION['redirect']; ?></p>
+                            <?php } ?>
                             <div class="form-group mb-3">
                                 <input type="text" required class="form-control" name="taikhoan" placeholder="Tài khoản">
                             </div>

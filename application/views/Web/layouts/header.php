@@ -90,7 +90,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false"> 
                     <span class="ion-android-menu"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse justify-content-center " id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="dropdown">
                             <a class="nav-link" href="<?php echo base_url(); ?>" style="font-family: system-ui;"><i class="linearicons-home"></i> Trang Chủ</a>   
@@ -114,6 +114,12 @@
                                 <button type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></button>
                             </form>
                         </div><div class="search_overlay"></div>
+                    </li>
+                    <li class="dropdown cart_dropdown">
+                        <a class="nav-link cart_trigger" href="#">
+                            <i class="linearicons-heart"></i>
+                            <span class="cart_count">2</span>
+                        </a>
                     </li>
                     <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="#" data-bs-toggle="dropdown"><i class="linearicons-cart"></i><span class="cart_count">2</span></a>
                         <div class="cart_box dropdown-menu dropdown-menu-right">
