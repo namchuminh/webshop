@@ -138,8 +138,20 @@
                                 <?php } ?>
                             </ul>
                             <div class="cart_footer">
-                                <p class="cart_total"><strong>Tổng Tiền:</strong> <span class="cart_price"> </span><span class="price_symbole"><?php echo isset($_SESSION['sumCart']) ? number_format($_SESSION['sumCart']) : 0; ?>đ</span></p>
-                                <p class="cart_buttons"><a href="#" class="btn btn-fill-line view-cart">Giỏ Hàng</a><a href="#" class="btn btn-fill-out checkout">Thanh Toán</a></p>
+                                <p class="cart_total"><strong>Tổng Tiền:</strong> <span class="cart_price"> </span><span class="price_symbole">
+                                    <?php 
+                                        if(isset($_SESSION['sumCart'])){ 
+                                            if(isset($_SESSION['saleCode'])){
+                                                echo number_format($_SESSION['sumCart'] + $_SESSION['saleCode']);
+                                            }else{
+                                                echo number_format($_SESSION['sumCart']);
+                                            }
+                                        }else{
+                                            echo 0;
+                                        }
+                                    ?>đ
+                                </span></p>
+                                <p class="cart_buttons"><a href="<?php echo base_url('gio-hang/'); ?>" class="btn btn-fill-line view-cart">Giỏ Hàng</a><a href="#" class="btn btn-fill-out checkout">Thanh Toán</a></p>
                             </div>
                         </div>
                     </li>
