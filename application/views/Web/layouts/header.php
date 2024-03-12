@@ -151,7 +151,12 @@
                                         }
                                     ?>đ
                                 </span></p>
-                                <p class="cart_buttons"><a href="<?php echo base_url('gio-hang/'); ?>" class="btn btn-fill-line view-cart">Giỏ Hàng</a><a href="#" class="btn btn-fill-out checkout">Thanh Toán</a></p>
+                                <p class="cart_buttons">
+                                    <a href="<?php echo base_url('gio-hang/'); ?>" class="btn btn-fill-line view-cart">Giỏ Hàng</a>
+                                    <?php if(isset($_SESSION['cart'])){ ?>
+                                        <a href="<?php echo base_url('thanh-toan/'); ?>" class="btn btn-fill-out checkout">Thanh Toán</a>
+                                    <?php } ?>
+                                </p>
                             </div>
                         </div>
                     </li>

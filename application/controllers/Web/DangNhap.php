@@ -49,6 +49,10 @@ class DangNhap extends MY_Controller {
 					if($this->session->has_userdata('lienhe')){
 			            return redirect(base_url('lien-he/'));
 			        }
+
+			        if($this->session->has_userdata('thanhtoan')){
+			            return redirect(base_url('thanh-toan/'));
+			        }
 					
 					return redirect(base_url('khach-hang/'));
 				}

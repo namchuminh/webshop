@@ -16,6 +16,12 @@ class Model_SanPham extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function updateNumber($MaSanPham,$SoLuong){
+		$sql = "UPDATE sanpham SET SoLuong = ? WHERE MaSanPham = ?";
+		$result = $this->db->query($sql, array($SoLuong,$MaSanPham));
+		return $result;
+	}
+
 	public function checkNumber()
 	{
 		$sql = "SELECT sanpham.*, chuyenmuc.TenChuyenMuc FROM sanpham,chuyenmuc WHERE sanpham.MaChuyenMuc = chuyenmuc.MaChuyenMuc AND sanpham.TrangThai = 1";

@@ -89,5 +89,7 @@ $route['gio-hang/them/(:any)/(:any)'] = 'Web/GioHang/add/$1/$2';
 $route['gio-hang/xoa/(:any)'] = 'Web/GioHang/delete/$1';
 $route['gio-hang/giam-gia/(:any)'] = 'Web/GioHang/code/$1';
 
+$route['thanh-toan'] = 'Web/ThanhToan';
+
 
 

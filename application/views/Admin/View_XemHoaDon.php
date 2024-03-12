@@ -39,10 +39,6 @@
                       <p style="margin-left: 10px;"><?php echo $detail[0]['DiaChi'] ?></p>
                   </span>
                   <span style="display: flex;">
-                      <b>Tổng Tiền: </b>
-                      <p style="margin-left: 10px;"><?php echo number_format($detail[0]['TongTien']) ?> VND</p>
-                  </span>
-                  <span style="display: flex;">
                       <b>Thời Gian: </b>
                       <p style="margin-left: 10px;"><?php echo $detail[0]['ThoiGian'] ?></p>
                   </span>
@@ -65,6 +61,7 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <?php $tongtien = 0; ?>
                     <?php foreach ($list as $key => $value): ?>
                       <tr>
                         <td><?php echo $key + 1; ?></td>
@@ -80,11 +77,38 @@
                           <?php echo number_format($value['SoLuong'] * $value['GiaBan']); ?> VND
                         </td>
                       </tr>
+                      <?php $tongtien += $value['SoLuong'] * $value['GiaBan']; ?>
                     <?php endforeach ?>
                   </tbody>
                 </table>
+                <div class="text-right mt-2 d-flex justify-content-end mr-4">
+                  <span class="d-flex m-1">
+                      <b>Tạm Tính: </b>
+                      <p style="margin-left: 5px;"><?php echo number_format($tongtien) ?> VND</p>
+                  </span>
+                  <span class="d-flex m-1">
+                      <b>Phí Giao Hàng: </b>
+                      <p style="margin-left: 5px;">
+                        <?php 
+                          if($tongtien >= $config[0]['MienPhiShip']){
+                            echo 0;
+                          }else{
+                            echo number_format($config[0]['PhiShip']) ;
+                          }
+                        ?> 
+                      VND</p>
+                  </span>
+                  <span class="d-flex m-1">
+                      <b>Giảm Giá: </b>
+                      <p style="margin-left: 5px;"><?php echo number_format($detail[0]['GiaTriGiam']) ?> VND</p>
+                  </span>
+                  <span class="d-flex m-1">
+                      <b>Tổng Tiền: </b>
+                      <p style="margin-left: 5px;"><?php echo number_format($detail[0]['TongTien']) ?> VND</p>
+                  </span>
+                </div>
               </div>
-              <div class="card-footer clearfix mt-3" style="background: white;">
+              <div class="card-footer clearfix" style="background: white;">
                 <a class="btn btn-success not_print" href="<?php echo base_url('admin/hoa-don/'); ?>">Quay Lại</a>
                 <button class="btn btn-primary not_print" onclick="window.print()">In Hóa Đơn</button>
                 <?php if(($detail[0]['ThanhToan'] == 0) && ($detail[0]['TrangThai'] != 0) && ($detail[0]['TrangThai'] != 4)){ ?>

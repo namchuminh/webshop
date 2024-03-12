@@ -136,7 +136,7 @@
                             </table>
                         </div>
                         <div class="w-100 text-right">
-                            <a href="#" class="btn btn-fill-out">Thanh Toán</a>
+                            <a href="<?php echo base_url('thanh-toan/'); ?>" class="btn btn-fill-out">Thanh Toán</a>
                         </div>
                     </div>
                 </div>

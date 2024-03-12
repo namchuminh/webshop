@@ -131,6 +131,10 @@ class GioHang extends MY_Controller {
                 unset($_SESSION['saleCode']);
             }
 
+            if (isset($_SESSION['idSaleCode'])) {
+                unset($_SESSION['idSaleCode']);
+            }
+
             unset($_SESSION['cart']);
             unset($_SESSION['sumCart']);
             unset($_SESSION['numberCart']);
@@ -150,6 +154,7 @@ class GioHang extends MY_Controller {
             return;
         }
 
+        $idmagiamgia = $this->Model_MaGiamGia->checkCode($magiamgia)[0]['MaGiamGia'];
         $solandung = $this->Model_MaGiamGia->checkCode($magiamgia)[0]['DaSuDung'];
         $soluong = $this->Model_MaGiamGia->checkCode($magiamgia)[0]['SoLuong'];
         $ngayhethan = $this->Model_MaGiamGia->checkCode($magiamgia)[0]['ThoiGian'];
@@ -173,6 +178,7 @@ class GioHang extends MY_Controller {
         }
 
         $this->session->set_userdata('saleCode', $trigia);
+        $this->session->set_userdata('idSaleCode', $idmagiamgia);
 
         if(isset($_SESSION['saleCode'])){
             $saleCode = $this->session->userdata('saleCode');

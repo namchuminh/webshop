@@ -10,6 +10,7 @@ class HoaDon extends CI_Controller {
 		}
 
 		$this->load->model('Admin/Model_HoaDon');
+		$this->load->model('Admin/Model_CauHinh');
 	}
 
 	public function index()
@@ -57,7 +58,7 @@ class HoaDon extends CI_Controller {
 			$this->session->set_flashdata('error', 'Hóa đơn không tồn tại!');
 			return redirect(base_url('admin/hoa-don/'));
 		}
-
+		$data['config'] = $this->Model_CauHinh->getAll();
 		$data['list'] = $this->Model_HoaDon->getDetailById($mahoadon);
 		$data['detail'] = $this->Model_HoaDon->getById($mahoadon);
 		$data['title'] = "Chi tiết hóa đơn";
