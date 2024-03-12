@@ -83,6 +83,7 @@ $route['dang-nhap'] = 'Web/DangNhap';
 $route['dang-xuat'] = 'Web/DangXuat';
 $route['dang-ky'] = 'Web/DangNhap/register';
 
+$route['gio-hang/them/(:any)/(:any)'] = 'Web/GioHang/add/$1/$2';
 
 
 

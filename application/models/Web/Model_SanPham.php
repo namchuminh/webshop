@@ -10,6 +10,12 @@ class Model_SanPham extends CI_Model {
 		
 	}
 
+	public function getById($MaSanPham){
+		$sql = "SELECT * FROM sanpham WHERE MaSanPham = ? AND TrangThai = 1";
+		$result = $this->db->query($sql, array($MaSanPham));
+		return $result->result_array();
+	}
+
 	public function checkNumber()
 	{
 		$sql = "SELECT sanpham.*, chuyenmuc.TenChuyenMuc FROM sanpham,chuyenmuc WHERE sanpham.MaChuyenMuc = chuyenmuc.MaChuyenMuc AND sanpham.TrangThai = 1";

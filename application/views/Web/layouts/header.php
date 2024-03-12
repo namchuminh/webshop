@@ -118,26 +118,28 @@
                     <li class="dropdown cart_dropdown">
                         <a class="nav-link cart_trigger" href="#">
                             <i class="linearicons-heart"></i>
-                            <span class="cart_count">2</span>
+                            <span class="wishlist_count">2</span>
                         </a>
                     </li>
-                    <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="#" data-bs-toggle="dropdown"><i class="linearicons-cart"></i><span class="cart_count">2</span></a>
-                        <div class="cart_box dropdown-menu dropdown-menu-right">
+                    <li class="dropdown cart_dropdown">
+                        <a class="nav-link cart_trigger" href="#" data-bs-toggle="dropdown">
+                            <i class="linearicons-bag2"></i>
+                            <span class="cart_count"><?php echo isset($_SESSION['numberCart']) ? $_SESSION['numberCart'] : 0; ?></span>
+                        </a>
+                        <div class="cart_box cart_right dropdown-menu dropdown-menu-right">
                             <ul class="cart_list">
-                                <li>
-                                    <a href="#" class="item_remove"><i class="ion-close"></i></a>
-                                    <a href="#"><img src="assets/images/cart_thamb1.jpg" alt="cart_thumb1">Variable product 001</a>
-                                    <span class="cart_quantity"> 1 x <span class="cart_amount"> <span class="price_symbole">$</span></span>78.00</span>
-                                </li>
-                                <li>
-                                    <a href="#" class="item_remove"><i class="ion-close"></i></a>
-                                    <a href="#"><img src="assets/images/cart_thamb2.jpg" alt="cart_thumb2">Ornare sed consequat</a>
-                                    <span class="cart_quantity"> 1 x <span class="cart_amount"> <span class="price_symbole">$</span></span>81.00</span>
-                                </li>
+                                <?php if(isset($_SESSION['cart'])){ ?>
+                                    <?php foreach ($_SESSION['cart'] as $key => $value): ?>
+                                        <li>
+                                            <a href="<?php echo base_url('san-pham/'.$value['slug'].'/') ?>"><img src="<?php echo $value['image'] ?>" style="height: 80px"><?php echo $value['name']; ?></a>
+                                            <span class="cart_quantity"> <?php echo $value['number']; ?> x <span class="cart_amount"> <span class="price_symbole"></span></span><?php echo number_format($value['price']); ?>đ</span>
+                                        </li>
+                                    <?php endforeach ?>
+                                <?php } ?>
                             </ul>
                             <div class="cart_footer">
-                                <p class="cart_total"><strong>Subtotal:</strong> <span class="cart_price"> <span class="price_symbole">$</span></span>159.00</p>
-                                <p class="cart_buttons"><a href="#" class="btn btn-fill-line view-cart">View Cart</a><a href="#" class="btn btn-fill-out checkout">Checkout</a></p>
+                                <p class="cart_total"><strong>Tổng Tiền:</strong> <span class="cart_price"> </span><span class="price_symbole"><?php echo isset($_SESSION['sumCart']) ? number_format($_SESSION['sumCart']) : 0; ?>đ</span></p>
+                                <p class="cart_buttons"><a href="#" class="btn btn-fill-line view-cart">Giỏ Hàng</a><a href="#" class="btn btn-fill-out checkout">Thanh Toán</a></p>
                             </div>
                         </div>
                     </li>
