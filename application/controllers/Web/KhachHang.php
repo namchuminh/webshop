@@ -93,6 +93,19 @@ class KhachHang extends MY_Controller {
 			echo "Cập nhật thông tin thành công!";
 		}
 	}
+
+	public function order($madonhang){
+
+		if(count($this->Model_KhachHang->getOrderDetailById($madonhang)) <= 0){
+			$data['title'] = "Không tìm thấy đơn hàng!";
+			return $this->load->view('Web/404', $data);
+		}
+
+		$data['title'] = "Chi tiết đơn hàng";
+		$data['list'] = $this->Model_KhachHang->getOrderDetailById($madonhang);
+		$data['detail'] = $this->Model_KhachHang->getById($madonhang);
+		return $this->load->view('Web/View_ChiTietDonHang', $data);
+	}
 }
 
 /* End of file KhachHang.php */

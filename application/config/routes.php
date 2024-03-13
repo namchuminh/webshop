@@ -93,6 +93,7 @@ $route['thanh-toan'] = 'Web/ThanhToan';
 
 $route['khach-hang'] = 'Web/KhachHang';
 $route['khach-hang/sua'] = 'Web/KhachHang/update';
+$route['khach-hang/don-hang/(:any)'] = 'Web/KhachHang/order/$1';
 
 
 
