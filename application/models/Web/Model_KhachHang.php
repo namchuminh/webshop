@@ -16,6 +16,18 @@ class Model_KhachHang extends CI_Model {
 		return $result;
 	}
 
+
+	public function getOrderById($makhachhang){
+		$sql = "SELECT * FROM hoadon WHERE MaKhachHang = ?";
+		$result = $this->db->query($sql, array($makhachhang));
+		return $result->result_array();
+	}
+
+	public function update($hoten,$matkhau,$sodienthoai,$email,$diachhi,$makhachhang){
+		$sql = "UPDATE `khachhang` SET `HoTen` = ?, `MatKhau` = ?, `SoDienThoai` = ?, `Email` = ?, `DiaChi` = ? WHERE MaKhachHang = ?";
+		$result = $this->db->query($sql, array($hoten,$matkhau,$sodienthoai,$email,$diachhi,$makhachhang));
+		return $result;
+	}
 }
 
 /* End of file Model_KhachHang.php */

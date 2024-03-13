@@ -91,5 +91,8 @@ $route['gio-hang/giam-gia/(:any)'] = 'Web/GioHang/code/$1';
 
 $route['thanh-toan'] = 'Web/ThanhToan';
 
+$route['khach-hang'] = 'Web/KhachHang';
+$route['khach-hang/sua'] = 'Web/KhachHang/update';
+
 
 
