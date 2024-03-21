@@ -48,6 +48,7 @@
                         <td><?php echo $value['SoLuongCu']; ?> sản phẩm</td>
                         <td><?php echo $value['SoLuongMoi']; ?> sản phẩm</td>
                         <td><?php echo $value['ThoiGian']; ?></td>
+                      </tr>
                     <?php endforeach ?>
                   </tbody>
                 </table>

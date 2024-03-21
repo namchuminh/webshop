@@ -7,6 +7,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 $route['admin'] = 'Admin/TrangChu';
+$route['admin/doanh-thu-thang'] = 'Admin/TrangChu/sumRevenue';
 
 $route['admin/dang-nhap'] = 'Admin/DangNhap/index';
 $route['admin/dang-xuat'] = 'Admin/DangXuat/index';
