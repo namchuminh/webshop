@@ -81,18 +81,44 @@
                             </div>
                             <hr />
                             <div class="cart_extra">
-                                <div class="cart-product-quantity">
-                                    <div class="quantity">
-                                        <input type="button" value="-" class="minus">
-                                        <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
-                                        <input type="button" value="+" class="plus">
+                                <?php if($detail[0]['SoLuong'] <= 0){ ?>
+                                    <div class="cart-product-quantity">
+                                        <div class="product_sort_info">
+                                            <ul>
+                                                <li><i class="linearicons-shield-check"></i> Hiện Còn: <?php echo $detail[0]['SoLuong']; ?> sản phẩm</li>
+                                            </ul>
+                                        </div>
+                                        <div class="quantity">
+                                            <input type="button" value="-" class="minus">
+                                            <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
+                                            <input type="button" value="+" class="plus">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="cart_btn">
-                                    <button class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Thêm Giỏ Hàng</button>
-                                    <a class="add_compare" href="<?php echo base_url('san-pham/'.$suggest[rand(0,count($suggest) - 1)]['DuongDan'].'/'); ?>"><i class="icon-shuffle"></i></a>
-                                    <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>
-                                </div>
+                                    <div class="cart_btn" style="cursor: not-allowed;">
+                                        <button class="btn btn-fill-out" type="button" disabled style="text-decoration: line-through;"> Tạm Hết Hàng!</button>
+                                        <a class="add_compare" href="<?php echo base_url('san-pham/'.$suggest[rand(0,count($suggest) - 1)]['DuongDan'].'/'); ?>"><i class="icon-shuffle"></i></a>
+                                        <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>
+                                    </div>
+                                <?php }else{ ?>
+                                    <div class="cart-product-quantity">
+                                        <div class="product_sort_info">
+                                            <ul>
+                                                <li><i class="linearicons-shield-check"></i> Hiện Còn: <?php echo $detail[0]['SoLuong']; ?> sản phẩm</li>
+                                            </ul>
+                                        </div>
+                                        <div class="quantity">
+                                            <input type="button" value="-" class="minus">
+                                            <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
+                                            <input type="button" value="+" class="plus">
+                                        </div>
+                                        <span class="m-2 error"></span>
+                                    </div>
+                                    <div class="cart_btn">
+                                        <button class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> Thêm Giỏ Hàng</button>
+                                        <a class="add_compare" href="<?php echo base_url('san-pham/'.$suggest[rand(0,count($suggest) - 1)]['DuongDan'].'/'); ?>"><i class="icon-shuffle"></i></a>
+                                        <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>
+                                    </div>
+                                <?php } ?>
                             </div>
                             <hr />
                             <ul class="product-meta">
@@ -725,34 +751,44 @@
     });
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".btn-addtocart").click(function(e){
-            e.preventDefault()
-            var masanpham = "<?php echo $detail[0]['MaSanPham']; ?>";
-            var soluong = $(".qty").val();
-            let urlThem = "<?php echo base_url('gio-hang/them/') ?>" + masanpham + "/" + soluong;
 
-            $.get(urlThem, function(data){
-                var cart = JSON.parse(data);
-                $(".cart_count").text(cart.numberCart)
-                $(".price_symbole").text(cart.sumCart + "đ")
+<?php if($detail[0]['SoLuong'] >= 1){ ?>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".btn-addtocart").click(function(e){
+                e.preventDefault()
+                var soluong = $(".qty").val();
+                var soluongsanpham = '<?php echo $detail[0]['SoLuong'] ?>';
 
-                $('.cart_list').empty();
-                var cartList = cart.cart;
+                if(parseInt(soluong) > soluongsanpham){
+                    $('.error').html("<br>Số lượng thêm không được quá " + soluongsanpham + " sản phẩm!<br><br>")
+                }else{
+                    $('.error').html("")
 
-                for (const key in cartList) {
-                    if (cartList.hasOwnProperty(key)) {
-                        const item = cartList[key];
-                        var formatter = new Intl.NumberFormat('en-US');
-                        var price = formatter.format(item.price);
-                        $('.cart_list').append('<li> <a href="<?php echo base_url('san-pham/') ?>'+item.slug+'/"><img src="'+item.image+'" style="height: 80px">'+item.name+'</a> <span class="cart_quantity"> '+item.number+' x <span class="cart_amount"> <span class="price_symbole"></span></span>'+price+'đ</span> </li>');
-                    }
+                    var masanpham = "<?php echo $detail[0]['MaSanPham']; ?>";
+                    
+                    let urlThem = "<?php echo base_url('gio-hang/them/') ?>" + masanpham + "/" + soluong;
+
+                    $.get(urlThem, function(data){
+                        var cart = JSON.parse(data);
+                        $(".cart_count").text(cart.numberCart)
+                        $(".price_symbole").text(cart.sumCart + "đ")
+
+                        $('.cart_list').empty();
+                        var cartList = cart.cart;
+
+                        for (const key in cartList) {
+                            if (cartList.hasOwnProperty(key)) {
+                                const item = cartList[key];
+                                var formatter = new Intl.NumberFormat('en-US');
+                                var price = formatter.format(item.price);
+                                $('.cart_list').append('<li> <a href="<?php echo base_url('san-pham/') ?>'+item.slug+'/"><img src="'+item.image+'" style="height: 80px">'+item.name+'</a> <span class="cart_quantity"> '+item.number+' x <span class="cart_amount"> <span class="price_symbole"></span></span>'+price+'đ</span> </li>');
+                            }
+                        }
+                    })
                 }
 
-                $(".qty").val(1);
-            })
-
+            });
         });
-    });
-</script>
+    </script>
+<?php } ?>

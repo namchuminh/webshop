@@ -29,7 +29,7 @@
               <div class="inner">
                 <h3><?php echo $donHangMoi; ?></h3>
 
-                <p>Đơn Hàng Mới</p>
+                <p>Đơn Hàng Hôm Nay</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -42,7 +42,7 @@
             <div class="small-box bg-success">
               <div class="inner">
                 <h3><?php echo number_format($doanhThuNgay); ?> VND</h3>
-                <p>Doanh Thu Ngày</p>
+                <p>Doanh Thu Hôm Nay</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -56,7 +56,7 @@
               <div class="inner">
                 <h3><?php echo $khachHangMoi; ?></h3>
 
-                <p>Khách Hàng Mới</p>
+                <p>Khách Hàng Hôm Nay</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
@@ -80,7 +80,106 @@
           <!-- ./col -->
         </div>
         <div class="row">
-          <section class="col-lg-12 connectedSortable ui-sortable">
+          <div class="col-md-4 col-sm-6 col-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-info"><i class="ion ion-stats-bars"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Doanh Thu Tháng Này</span>
+                <span class="info-box-number"><?php echo number_format($doanhThuThang); ?> VND</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-4 col-sm-6 col-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-success"><i class="fa-solid fa-cart-shopping"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Đơn Hàng Tháng Này</span>
+                <span class="info-box-number"><?php echo $donHangThang; ?> Đơn Hàng</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-4 col-sm-6 col-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-warning"><i class="fa-solid fa-bag-shopping"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Bán Trong Tháng Này</span>
+                <span class="info-box-number"><?php echo $banTrongThang; ?> Sản Phẩm</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-6 col-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-info"><i class="ion ion-stats-bars"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Doanh Thu Tuần Này</span>
+                <span class="info-box-number"><?php echo number_format($doanhThuTuan); ?> VND</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-4 col-sm-6 col-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-success"><i class="fa-solid fa-cart-shopping"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Đơn Hàng Tuần Này</span>
+                <span class="info-box-number"><?php echo $donHangTuan; ?> Đơn Hàng</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-4 col-sm-6 col-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-warning"><i class="fa-solid fa-bag-shopping"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Bán Trong Tuần Này</span>
+                <span class="info-box-number"><?php echo $banTrongTuan; ?> Sản Phẩm</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+        </div>
+
+        <div class="row">
+          <section class="col-lg-6 connectedSortable ui-sortable">
+            <!-- solid sales graph -->
+            <div class="card bg-gradient-white">
+              <div class="card-header border-0">
+                <h3 class="card-title">
+                  <i class="fas fa-th mr-1"></i>
+                  Đơn Hàng Theo Tháng
+                </h3>
+              </div>
+              <div class="card-body">
+                <canvas id="orderChar" style="min-height: 250px; height: 400px; max-height: 400px; max-width: 100%;"></canvas>
+              </div>
+              <!-- /.card-body -->
+             
+            </div>
+            <!-- /.card -->
+          </section>
+
+          <section class="col-lg-6 connectedSortable ui-sortable">
             <!-- solid sales graph -->
             <div class="card bg-gradient-white">
               <div class="card-header border-0">
@@ -88,18 +187,9 @@
                   <i class="fas fa-th mr-1"></i>
                   Doanh Thu Theo Tháng
                 </h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
               </div>
               <div class="card-body">
-                <canvas id="revenueChart" style="min-height: 250px; height: 500px; max-height: 500px; max-width: 100%;"></canvas>
+                <canvas id="revenueChart" style="min-height: 250px; height: 400px; max-height: 400px; max-width: 100%;"></canvas>
               </div>
               <!-- /.card-body -->
              
@@ -210,6 +300,45 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   $(document).ready(function(){
+      $.get('<?php echo base_url("admin/don-hang-thang/"); ?>', function(data){
+
+        var data = JSON.parse(data)
+        // Dữ liệu doanh thu theo tháng
+        var months = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+        var order = data;
+
+        // Lấy thẻ canvas
+        var ctx = document.getElementById('orderChar').getContext('2d');
+
+        // Khởi tạo biểu đồ đường
+        var orderChar = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Đơn Hàng Theo Tháng',
+                    data: order,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1,
+                    fill: true
+                }]
+            },
+            options: {
+                scales: {
+                  y: {
+                      beginAtZero: true,
+                      ticks: {
+                          stepSize: 1, // Đảm bảo chỉ hiển thị số nguyên
+                          callback: function(value, index, values) {
+                              return Math.round(value); // Làm tròn giá trị
+                          }
+                      }
+                  }
+              }
+            },
+        });
+      })
+
       $.get('<?php echo base_url("admin/doanh-thu-thang/"); ?>', function(data){
 
         var data = JSON.parse(data)

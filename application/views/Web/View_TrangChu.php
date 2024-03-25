@@ -305,6 +305,11 @@
                                                 </div>
                                                 <span class="rating_num"></span>
                                             </div>
+                                            <?php if($value['SoLuong'] <= 0){ ?>
+                                                <span>Tạm Hết Hàng</span>
+                                            <?php }else{ ?>
+                                                <span>Hiện Còn: <?php echo $value['SoLuong']; ?> Sản Phẩm</span>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -420,6 +425,11 @@
                                                 </div>
                                                 <span class="rating_num"></span>
                                             </div>
+                                            <?php if($value['SoLuong'] <= 0){ ?>
+                                                <span>Tạm Hết Hàng</span>
+                                            <?php }else{ ?>
+                                                <span>Hiện Còn: <?php echo $value['SoLuong']; ?> Sản Phẩm</span>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>

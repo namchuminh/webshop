@@ -32,6 +32,14 @@ class GioHang extends MY_Controller {
         	return;
         }
 
+        if($quantity > $this->Model_SanPham->getById($product_id)[0]['SoLuong']){
+            return;
+        }
+
+        if(($cart[$product_id]['number'] + $quantity) > $this->Model_SanPham->getById($product_id)[0]['SoLuong']){
+            return;
+        }
+
         $price = $this->Model_SanPham->getById($product_id)[0]['GiaBan'];
         $image = $this->Model_SanPham->getById($product_id)[0]['AnhChinh'];
         $name =  $this->Model_SanPham->getById($product_id)[0]['TenSanPham'];
@@ -78,6 +86,18 @@ class GioHang extends MY_Controller {
 
     public function updateNumber($product_id, $number){
         if(count($this->Model_SanPham->getById($product_id)) == 0){
+            return;
+        }
+
+        if(empty($number) || $number <= 0){
+            return;
+        }
+        
+        if($number > $this->Model_SanPham->getById($product_id)[0]['SoLuong']){
+            return;
+        }
+
+        if(($cart[$product_id]['number'] + $number) > $this->Model_SanPham->getById($product_id)[0]['SoLuong']){
             return;
         }
 

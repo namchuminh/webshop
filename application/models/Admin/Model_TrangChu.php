@@ -70,6 +70,36 @@ class Model_TrangChu extends CI_Model {
 		return $result->result_array();
 	}
 
+
+	public function getSumOrder($thang){
+		$sql = "SELECT COUNT(*) AS TongDon FROM hoadon WHERE MONTH(ThoiGian) = ? AND YEAR(ThoiGian) = YEAR(CURDATE())";
+		$result = $this->db->query($sql, array($thang));
+		return $result->result_array();
+	}
+
+	public function getSell($thang){
+		$sql = "SELECT COALESCE(SUM(SoLuong), 0) AS SanPham FROM hoadon WHERE MONTH(ThoiGian) = ? AND YEAR(ThoiGian) = YEAR(CURDATE())";
+		$result = $this->db->query($sql, array($thang));
+		return $result->result_array();
+	}
+
+	public function getSumOrderWeek(){
+		$sql = "SELECT COUNT(*) AS TongDon FROM hoadon WHERE ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1;";
+		$result = $this->db->query($sql);
+		return $result->result_array();
+	}
+
+	public function getSumRevenueWeek(){
+		$sql = "SELECT COALESCE(SUM(TongTien), 0) AS TongTien FROM hoadon WHERE ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1;";
+		$result = $this->db->query($sql);
+		return $result->result_array();
+	}
+
+	public function getSellWeek(){
+		$sql = "SELECT COALESCE(SUM(SoLuong), 0) AS SanPham FROM hoadon WHERE ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1;";
+		$result = $this->db->query($sql);
+		return $result->result_array();
+	}
 }
 
 /* End of file Model_TrangChu.php */

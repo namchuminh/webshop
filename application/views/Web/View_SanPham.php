@@ -94,6 +94,11 @@
                                             <div class="product_rate" style="width:100%"></div>
                                         </div>
                                     </div>
+                                    <?php if($value['SoLuong'] <= 0){ ?>
+                                        <span>Tạm Hết Hàng</span>
+                                    <?php }else{ ?>
+                                        <span>Hiện Còn: <?php echo $value['SoLuong']; ?> Sản Phẩm</span>
+                                    <?php } ?>
                                     <div class="pr_desc">
                                         <p><?php echo $value['MoTaNgan']; ?></p>
                                     </div>
