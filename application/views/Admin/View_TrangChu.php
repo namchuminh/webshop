@@ -83,10 +83,10 @@
           <div class="col-md-4 col-sm-6 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-info"><i class="ion ion-stats-bars"></i></span>
-              <div class="info-box-content">
+              <a href="<?php echo base_url('admin/hoa-don/thong-ke/?type=thang'); ?>" class="info-box-content" style="color: black;">
                 <span class="info-box-text">Doanh Thu Tháng Này</span>
                 <span class="info-box-number"><?php echo number_format($doanhThuThang); ?> VND</span>
-              </div>
+              </a>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
@@ -96,10 +96,10 @@
             <div class="info-box">
               <span class="info-box-icon bg-success"><i class="fa-solid fa-cart-shopping"></i></span>
 
-              <div class="info-box-content">
+              <a href="<?php echo base_url('admin/hoa-don/thong-ke/?type=thang'); ?>" class="info-box-content" style="color: black;">
                 <span class="info-box-text">Đơn Hàng Tháng Này</span>
                 <span class="info-box-number"><?php echo $donHangThang; ?> Đơn Hàng</span>
-              </div>
+              </a>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
@@ -109,10 +109,10 @@
             <div class="info-box">
               <span class="info-box-icon bg-warning"><i class="fa-solid fa-bag-shopping"></i></span>
 
-              <div class="info-box-content">
+              <a href="<?php echo base_url('admin/hoa-don/thong-ke/?type=thang'); ?>" class="info-box-content" style="color: black;">
                 <span class="info-box-text">Bán Trong Tháng Này</span>
                 <span class="info-box-number"><?php echo $banTrongThang; ?> Sản Phẩm</span>
-              </div>
+              </a>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
@@ -123,10 +123,10 @@
           <div class="col-md-4 col-sm-6 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-info"><i class="ion ion-stats-bars"></i></span>
-              <div class="info-box-content">
+              <a href="<?php echo base_url('admin/hoa-don/thong-ke/?type=tuan'); ?>" class="info-box-content" style="color: black;">
                 <span class="info-box-text">Doanh Thu Tuần Này</span>
                 <span class="info-box-number"><?php echo number_format($doanhThuTuan); ?> VND</span>
-              </div>
+              </a>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
@@ -136,10 +136,10 @@
             <div class="info-box">
               <span class="info-box-icon bg-success"><i class="fa-solid fa-cart-shopping"></i></span>
 
-              <div class="info-box-content">
+              <a href="<?php echo base_url('admin/hoa-don/thong-ke/?type=tuan'); ?>" class="info-box-content" style="color: black;">
                 <span class="info-box-text">Đơn Hàng Tuần Này</span>
                 <span class="info-box-number"><?php echo $donHangTuan; ?> Đơn Hàng</span>
-              </div>
+              </a>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
@@ -149,10 +149,10 @@
             <div class="info-box">
               <span class="info-box-icon bg-warning"><i class="fa-solid fa-bag-shopping"></i></span>
 
-              <div class="info-box-content">
+              <a href="<?php echo base_url('admin/hoa-don/thong-ke/?type=tuan'); ?>" class="info-box-content" style="color: black;">
                 <span class="info-box-text">Bán Trong Tuần Này</span>
                 <span class="info-box-number"><?php echo $banTrongTuan; ?> Sản Phẩm</span>
-              </div>
+              </a>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->

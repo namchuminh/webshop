@@ -59,6 +59,8 @@ $route['admin/hoa-don/(:any)/huy'] = 'Admin/HoaDon/cancel/$1';
 $route['admin/hoa-don/(:any)/trang-thai'] = 'Admin/HoaDon/status/$1';
 $route['admin/hoa-don/tim-kiem'] = 'Admin/HoaDon/search';
 $route['admin/hoa-don/tim-kiem/(:any)/trang'] = 'Admin/HoaDon/pageSearch/$1';
+$route['admin/hoa-don/thong-ke'] = 'Admin/HoaDon/type';
+$route['admin/hoa-don/thong-ke/(:any)/trang'] = 'Admin/HoaDon/pageType/$1';
 
 
 

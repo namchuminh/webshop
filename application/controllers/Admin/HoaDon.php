@@ -228,7 +228,6 @@ class HoaDon extends CI_Controller {
 		}
 
 
-
 		$data['title'] = "Danh sách hóa đơn";
 		$totalRecords = $this->Model_HoaDon->checkNumberSearch($madonhang,$thanhtoan,$trangthai);
 		$recordsPerPage = 10;
@@ -253,6 +252,73 @@ class HoaDon extends CI_Controller {
 			$data['totalPages'] = $totalPages;
 			$data['list'] = $this->Model_HoaDon->search($madonhang,$thanhtoan,$trangthai,$start);
 			return $this->load->view('Admin/View_HoaDonTimKiem', $data);
+		}
+	}
+
+	public function type(){
+		if(!isset($_GET['type'])){
+			return redirect(base_url('admin/hoa-don/'));
+		}
+
+		$type = $this->input->get('type');
+
+		if(($type != "thang") && ($type != "tuan")){
+			return redirect(base_url('admin/hoa-don/'));
+		}
+
+		$data['post'] = array(
+			"type" => $type
+		);
+
+		$totalRecords = $this->Model_HoaDon->checkNumberType($type);
+		$recordsPerPage = 10;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+		$data['totalPages'] = $totalPages;
+		$data['list'] = $this->Model_HoaDon->getType($type);
+		$data['title'] = "Danh sách hóa đơn";
+		return $this->load->view('Admin/View_HoaDonThongKe', $data);
+	}
+
+	public function pageType($trang){
+		if(!isset($_GET['type'])){
+			return redirect(base_url('admin/hoa-don/'));
+		}
+
+		$type = $this->input->get('type');
+
+		if(($type != "thang") && ($type != "tuan")){
+			return redirect(base_url('admin/hoa-don/'));
+		}
+
+		$data['post'] = array(
+			"type" => $type
+		);
+
+		$data['title'] = "Danh sách hóa đơn";
+		$totalRecords = $this->Model_HoaDon->checkNumberType($type);
+		$recordsPerPage = 10;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+		if($trang < 1){
+			return redirect(base_url('admin/hoa-don/'));
+		}
+
+		if($trang > $totalPages){
+			return redirect(base_url('admin/hoa-don/'));
+		}
+
+		$start = ($trang - 1) * $recordsPerPage;
+
+
+		if($start == 0){
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_HoaDon->getType($type);
+			return $this->load->view('Admin/View_HoaDonThongKe', $data);
+		}else{
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_HoaDon->getType($type,$start);
+			return $this->load->view('Admin/View_HoaDonThongKe', $data);
 		}
 	}
 }

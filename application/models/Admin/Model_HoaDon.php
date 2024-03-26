@@ -77,6 +77,30 @@ class Model_HoaDon extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function checkNumberType($type){
+		if($type == "thang"){
+			$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE MONTH(hoadon.ThoiGian) = ? AND YEAR(hoadon.ThoiGian) = YEAR(CURDATE()) ORDER BY hoadon.MaHoaDon DESC";
+			$result = $this->db->query($sql, array(date('m')));
+			return $result->num_rows();
+		}else if($type == "tuan"){
+			$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1 ORDER BY hoadon.MaHoaDon DESC";
+			$result = $this->db->query($sql, array(date('m')));
+			return $result->num_rows();
+		}
+	}
+
+	public function getType($type,$start = 0,$end = 10){
+		if($type == "thang"){
+			$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE MONTH(hoadon.ThoiGian) = ? AND YEAR(hoadon.ThoiGian) = YEAR(CURDATE()) ORDER BY hoadon.MaHoaDon DESC LIMIT ?, ?";
+			$result = $this->db->query($sql, array(date('m'), $start, $end));
+			return $result->result_array();
+		}else if($type == "tuan"){
+			$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1 ORDER BY hoadon.MaHoaDon DESC LIMIT ?, ?";
+			$result = $this->db->query($sql, array($start, $end));
+			return $result->result_array();
+		}
+	}
+
 }
 
 /* End of file Model_ChuyenMuc.php */
