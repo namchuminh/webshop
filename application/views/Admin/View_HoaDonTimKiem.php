@@ -118,7 +118,7 @@
               <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-right">
                 	<?php for($i = 1; $i <= $totalPages; $i++){ ?>
-                  		<li class="page-item"><a class="page-link" href="<?php echo base_url('admin/hoa-don/'.$i.'/trang/') ?>"><?php echo $i; ?></a></li>
+                  		<li class="page-item"><a class="page-link" href="<?php echo base_url('admin/hoa-don/tim-kiem/'.$i.'/trang/?mahoadon='.$post['madonhang'].'&thanhtoan='.$post['thanhtoan'].'&trangthai='.$post['trangthai']) ?>"><?php echo $i; ?></a></li>
                   	<?php } ?>      
                 </ul>
               </div>

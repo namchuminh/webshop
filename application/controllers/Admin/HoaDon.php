@@ -140,6 +140,121 @@ class HoaDon extends CI_Controller {
 			return redirect(base_url('admin/hoa-don/'.$mahoadon.'/xem/'));
 		}
 	}
+
+	public function search()
+	{
+		if(!isset($_POST['madonhang']) && !isset($_POST['thanhtoan']) && !isset($_POST['trangthai'])){
+			return redirect(base_url('admin/hoa-don/'));
+		}
+
+		$madonhang = $this->input->post('madonhang');
+		$trangthai = $this->input->post('trangthai');
+		$thanhtoan = $this->input->post('thanhtoan');
+
+		if(empty($madonhang) && empty($trangthai) && empty($thanhtoan)){
+			return redirect(base_url('admin/hoa-don/'));
+		}
+
+		
+		$data['post'] = array(
+			'madonhang' => $madonhang,
+			'trangthai' => $trangthai,
+			'thanhtoan' => $thanhtoan,
+		);
+
+		if($thanhtoan == -1){
+			$thanhtoan = 0;
+		}
+
+		if($trangthai == -1){
+			$trangthai = 0;
+		}
+
+		if(empty($_POST['thanhtoan']) || !isset($_POST['thanhtoan'])){
+			$thanhtoan = -1;
+		}
+
+		if(empty($_POST['trangthai']) || !isset($_POST['trangthai'])){
+			$trangthai = -1;
+		}
+
+
+		$totalRecords = $this->Model_HoaDon->checkNumberSearch($madonhang,$thanhtoan,$trangthai);
+		$recordsPerPage = 10;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+		$data['totalPages'] = $totalPages;
+		$data['list'] = $this->Model_HoaDon->search($madonhang,$thanhtoan,$trangthai);
+		$data['title'] = "Danh sách hóa đơn";
+		return $this->load->view('Admin/View_HoaDonTimKiem', $data);
+
+	}
+
+
+	public function pageSearch($trang){
+		if(!isset($_GET['madonhang']) && !isset($_GET['thanhtoan']) && !isset($_GET['trangthai'])){
+			return redirect(base_url('admin/hoa-don/'));
+		}
+
+		$madonhang = $this->input->get('madonhang');
+		$trangthai = $this->input->get('trangthai');
+		$thanhtoan = $this->input->get('thanhtoan');
+
+		if(empty($madonhang) && empty($trangthai) && empty($thanhtoan)){
+			return redirect(base_url('admin/hoa-don/'));
+		}
+
+		
+		$data['post'] = array(
+			'madonhang' => $madonhang,
+			'trangthai' => $trangthai,
+			'thanhtoan' => $thanhtoan,
+		);
+
+		if($thanhtoan == -1){
+			$thanhtoan = 0;
+		}
+
+		if($trangthai == -1){
+			$trangthai = 0;
+		}
+
+		if(empty($_GET['thanhtoan']) || !isset($_GET['thanhtoan'])){
+			$thanhtoan = -1;
+		}
+
+		if(empty($_GET['trangthai']) || !isset($_GET['trangthai'])){
+			$trangthai = -1;
+		}
+
+
+
+		$data['title'] = "Danh sách hóa đơn";
+		$totalRecords = $this->Model_HoaDon->checkNumberSearch($madonhang,$thanhtoan,$trangthai);
+		$recordsPerPage = 10;
+		$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+		if($trang < 1){
+			return redirect(base_url('admin/hoa-don/'));
+		}
+
+		if($trang > $totalPages){
+			return redirect(base_url('admin/hoa-don/'));
+		}
+
+		$start = ($trang - 1) * $recordsPerPage;
+
+
+		if($start == 0){
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_HoaDon->search($madonhang,$thanhtoan,$trangthai);
+			return $this->load->view('Admin/View_HoaDonTimKiem', $data);
+		}else{
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_HoaDon->search($madonhang,$thanhtoan,$trangthai,$start);
+			return $this->load->view('Admin/View_HoaDonTimKiem', $data);
+		}
+	}
 }
 
 /* End of file ChuyenMuc.php */
