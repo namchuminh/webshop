@@ -36,9 +36,12 @@ class GioHang extends MY_Controller {
             return;
         }
 
-        if(($cart[$product_id]['number'] + $quantity) > $this->Model_SanPham->getById($product_id)[0]['SoLuong']){
-            return;
+        if(isset($cart[$product_id]['number'])){
+            if(($cart[$product_id]['number'] + $quantity) > $this->Model_SanPham->getById($product_id)[0]['SoLuong']){
+                return;
+            }
         }
+        
 
         $price = $this->Model_SanPham->getById($product_id)[0]['GiaBan'];
         $image = $this->Model_SanPham->getById($product_id)[0]['AnhChinh'];
