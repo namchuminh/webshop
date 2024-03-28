@@ -25,6 +25,7 @@ class CauHinh extends CI_Controller {
 			$phiship = $this->input->post('phiship');
 			$mienphiship = $this->input->post('mienphiship');
 			$logo = $this->Model_CauHinh->getAll()[0]['Logo'];
+			$qrnganhang = $this->Model_CauHinh->getAll()[0]['QRNganHang'];
 
 			if(empty($tenwebsite) || empty($motaweb) || empty($diachi) || empty($email) || empty($sodienthoai) || empty($phiship) || empty($mienphiship)){
 				$data['error'] = "Vui lòng nhập đủ thông tin!";
@@ -59,7 +60,12 @@ class CauHinh extends CI_Controller {
 				$logo = base_url('uploads')."/".$img['file_name'];
 			}
 
-			$this->Model_CauHinh->update($tenwebsite,$motaweb,$logo,$diachi,$email,$sodienthoai,$phiship,$mienphiship);
+			if ($this->upload->do_upload('qrnganhang')){
+				$img = $this->upload->data();
+				$qrnganhang = base_url('uploads')."/".$img['file_name'];
+			}
+
+			$this->Model_CauHinh->update($tenwebsite,$motaweb,$logo,$diachi,$email,$sodienthoai,$phiship,$mienphiship,$qrnganhang);
 
 			$data['success'] = "Lưu cấu hình thành công!";
 			$data['detail'] = $this->Model_CauHinh->getAll();

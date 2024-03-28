@@ -41,7 +41,13 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="ten">Logo Website</label>
-                    <input type="file" class="form-control" id="ten" name="logo">
+                    <input type="file" class="form-control" name="logo">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ten">QR Chuyển Khoản</label>
+                    <input type="file" class="form-control" name="qrnganhang">
                   </div>
                 </div>
                 <div class="col-md-12">
