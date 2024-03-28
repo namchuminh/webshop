@@ -78,7 +78,15 @@
                                                     <td><?php echo $value['ThoiGian'] ?></td>
                                                     <td><?php echo $value['SoLuong'] ?> sản phẩm</td>
                                                     <td><?php echo number_format($value['TongTien']); ?>đ</td>
-                                                    <td><?php echo $value['ThanhToan'] == 0 ? "Chưa thanh toán" : "Đã thanh toán"; ?></td>
+                                                    <td>
+                                                        <?php if($value['ThanhToan'] == 0){ ?>
+                                                            Chưa thanh toán
+                                                        <?php }else if($value['ThanhToan'] == 1){ ?>
+                                                            Đã thanh toán
+                                                        <?php }else if($value['ThanhToan'] == 2){ ?>
+                                                            Chuyển khoản
+                                                        <?php } ?>
+                                                    </td>
                                                     <td>
                                                         <?php if($value['TrangThai'] == 0){ ?>
                                                             Đã hủy đơn

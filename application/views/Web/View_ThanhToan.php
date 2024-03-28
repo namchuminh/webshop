@@ -117,18 +117,20 @@
                             <h4>Thanh Toán</h4>
                         </div>
                         <div class="payment_option">
-                            <div class="custome-radio">
+                            <div class="custome-radio nhanhang">
                                 <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" value="option3" checked="">
                                 <label class="form-check-label" for="exampleRadios3">Trả Tiền Mặt</label>
                                 <p data-method="option3" class="payment-text">Bạn sẽ thanh toán trực tiếp khi nhận được sản phẩm. </p>
                             </div>
-                            <div class="custome-radio">
+                            <div class="custome-radio chuyenkhoan">
                                 <input class="form-check-input" type="radio" name="payment_option" id="exampleRadios4" value="option4">
                                 <label class="form-check-label" for="exampleRadios4">Chuyển Khoản</label>
-                                <p data-method="option4" class="payment-text">Bạn sẽ thanh toán qua ngân hàng trực tuyến.</p>
+                                <p data-method="option4" class="payment-text">Nội dung: KH <?php echo $_SESSION['khachhang'] ?> TTDH <?php echo $_SESSION['sumCart'] + $phiship ?> VND</p>
+                                <div class="maqr"></div>
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" class="thanhtoan" name="thanhtoan" value="0">
                     <button type="submit" class="btn btn-fill-out btn-block">Đặt Hàng</button>
                 </div>
             </div>
@@ -136,3 +138,18 @@
     </div>
 </div>
 <?php require(APPPATH.'views/web/layouts/footer.php'); ?>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".chuyenkhoan").click(function(e){
+            $(".maqr").html('<img src="<?php echo $config[0]['QRNganHang']; ?>">');
+            $(".thanhtoan").val(2);
+        });
+
+        $(".nhanhang").click(function(e){
+            $(".maqr").empty();
+            $(".thanhtoan").val(0);
+        });
+    });
+</script>

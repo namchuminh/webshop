@@ -37,6 +37,12 @@ class ThanhToan extends MY_Controller {
         	$diachi = $this->input->post('diachi').", ".$this->input->post('xa').", ".$this->input->post('huyen').", ".$this->input->post('tinh');
         	$soluong = 0;
         	$tongtien = 0;
+        	$thanhtoan = $this->input->post('thanhtoan');
+
+        	if(($thanhtoan != 0) && ($thanhtoan != 2)){
+        		return redirect(base_url('thanh-toan/'));
+        	}
+
         	foreach($cart as $key => $value){
         		$tongtien += $value['number'] * $value['price'];
         		$soluong += $value['number'];
@@ -53,9 +59,9 @@ class ThanhToan extends MY_Controller {
         	$mahoadon = 0;
         	if($this->session->has_userdata('idSaleCode')){
         		$magiamgia = $this->session->userdata('idSaleCode');
-        		$mahoadon = $this->Model_HoaDon->addWithSale($makhachhang,$tongtien,0,$magiamgia,$soluong,$diachi);
+        		$mahoadon = $this->Model_HoaDon->addWithSale($makhachhang,$tongtien,$thanhtoan,$magiamgia,$soluong,$diachi);
         	}else{
-        		$mahoadon = $this->Model_HoaDon->addWithoutSale($makhachhang,$tongtien,0,$soluong,$diachi);
+        		$mahoadon = $this->Model_HoaDon->addWithoutSale($makhachhang,$tongtien,$thanhtoan,$soluong,$diachi);
         	}
         	
         	foreach($cart as $key => $value){

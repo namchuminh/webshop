@@ -103,7 +103,7 @@ class KhachHang extends MY_Controller {
 
 
 		if($this->Model_KhachHang->getById($madonhang)[0]['MaKhachHang'] != $this->session->userdata('makhachhang')){
-			return redirect('khach-hang/');
+			return redirect(base_url('khach-hang/'));
 		}
 
 		$data['title'] = "Chi tiết đơn hàng";
@@ -114,21 +114,21 @@ class KhachHang extends MY_Controller {
 
 	public function cancel($madonhang){
 		if(count($this->Model_KhachHang->getOrderDetailById($madonhang)) <= 0){
-			return redirect('khach-hang/');
+			return redirect(base_url('khach-hang/'));
 		}
 
 		if($this->Model_KhachHang->getById($madonhang)[0]['MaKhachHang'] != $this->session->userdata('makhachhang')){
-			return redirect('khach-hang/');
+			return redirect(base_url('khach-hang/'));
 		}
 
 		$detail = $this->Model_KhachHang->getById($madonhang);
 
 		if(($detail[0]['TrangThai'] != 3) && ($detail[0]['TrangThai'] != 4) && ($detail[0]['TrangThai'] != 0)){
 			$this->Model_KhachHang->cancel($madonhang);
-			return redirect('khach-hang/don-hang/'.$madonhang.'/xem/');
+			return redirect(base_url('khach-hang/don-hang/'.$madonhang.'/xem/'));
 		}
 
-		return redirect('khach-hang/don-hang/'.$madonhang.'/xem/');
+		return redirect(base_url('khach-hang/don-hang/'.$madonhang.'/xem/'));
 	}
 }
 

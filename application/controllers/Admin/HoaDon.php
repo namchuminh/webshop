@@ -74,7 +74,7 @@ class HoaDon extends CI_Controller {
 
 		$detail = $this->Model_HoaDon->getById($mahoadon);
 
-		if(($detail[0]['ThanhToan'] == 0) && ($detail[0]['TrangThai'] != 0) && ($detail[0]['TrangThai'] != 4)){
+		if(($detail[0]['ThanhToan'] != 1) && ($detail[0]['TrangThai'] != 0) && ($detail[0]['TrangThai'] != 4)){
 			$this->Model_HoaDon->updatePay($mahoadon);
 			$this->session->set_flashdata('success', 'Xác nhận thanh toán thành công!');
 			return redirect(base_url('admin/hoa-don/'.$mahoadon.'/xem/'));
