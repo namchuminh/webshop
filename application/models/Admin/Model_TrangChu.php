@@ -17,7 +17,7 @@ class Model_TrangChu extends CI_Model {
 	}
 
 	public function getDoanhThuNgay(){
-		$sql = "SELECT COALESCE(SUM(TongTien), 0) AS TongTienSum FROM hoadon WHERE DAY(ThoiGian) = DAY(CURDATE()) AND MONTH(ThoiGian) = MONTH(CURDATE()) AND YEAR(ThoiGian) = YEAR(CURDATE())";
+		$sql = "SELECT COALESCE(SUM(TongTien), 0) AS TongTienSum FROM hoadon WHERE TrangThai = 3 AND DAY(ThoiGian) = DAY(CURDATE()) AND MONTH(ThoiGian) = MONTH(CURDATE()) AND YEAR(ThoiGian) = YEAR(CURDATE())";
 		$result = $this->db->query($sql);
 		return $result->result_array();
 	}
@@ -35,7 +35,7 @@ class Model_TrangChu extends CI_Model {
 	}
 
 	public function getSumRevenue($thang){
-		$sql = "SELECT SUM(TongTien) AS TongTien FROM hoadon WHERE MONTH(ThoiGian) = ? AND YEAR(ThoiGian) = YEAR(CURDATE())";
+		$sql = "SELECT SUM(TongTien) AS TongTien FROM hoadon WHERE TrangThai = 3 AND MONTH(ThoiGian) = ? AND YEAR(ThoiGian) = YEAR(CURDATE())";
 		$result = $this->db->query($sql, array($thang));
 		return $result->result_array();
 	}
@@ -78,7 +78,7 @@ class Model_TrangChu extends CI_Model {
 	}
 
 	public function getSell($thang){
-		$sql = "SELECT COALESCE(SUM(SoLuong), 0) AS SanPham FROM hoadon WHERE MONTH(ThoiGian) = ? AND YEAR(ThoiGian) = YEAR(CURDATE())";
+		$sql = "SELECT COALESCE(SUM(SoLuong), 0) AS SanPham FROM hoadon WHERE TrangThai = 3 AND MONTH(ThoiGian) = ? AND YEAR(ThoiGian) = YEAR(CURDATE())";
 		$result = $this->db->query($sql, array($thang));
 		return $result->result_array();
 	}
@@ -90,13 +90,13 @@ class Model_TrangChu extends CI_Model {
 	}
 
 	public function getSumRevenueWeek(){
-		$sql = "SELECT COALESCE(SUM(TongTien), 0) AS TongTien FROM hoadon WHERE ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1;";
+		$sql = "SELECT COALESCE(SUM(TongTien), 0) AS TongTien FROM hoadon WHERE TrangThai = 3 AND ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1;";
 		$result = $this->db->query($sql);
 		return $result->result_array();
 	}
 
 	public function getSellWeek(){
-		$sql = "SELECT COALESCE(SUM(SoLuong), 0) AS SanPham FROM hoadon WHERE ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1;";
+		$sql = "SELECT COALESCE(SUM(SoLuong), 0) AS SanPham FROM hoadon WHERE TrangThai = 3 AND ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1;";
 		$result = $this->db->query($sql);
 		return $result->result_array();
 	}

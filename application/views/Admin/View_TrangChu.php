@@ -221,7 +221,7 @@
                       <th>#</th>
                       <th>Tên Sản Phẩm</th>
                       <th>Số Lượng Cũ</th>
-                      <th>Số Lượng Nhập</th>
+                      <th>Số Lượng Mới</th>
                       <th>Thời Gian</th>
                     </tr>
                     </thead>
