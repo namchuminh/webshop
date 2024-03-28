@@ -33,6 +33,7 @@
                     <select class="form-control" name="thanhtoan">
                       <option value="">Trạng Thái Thanh Toán</option>
                       <option value="-1" <?php if(isset($post) && ($post['thanhtoan'] == -1)) { echo "selected"; } ?>>Chưa Thanh Toán</option>
+                      <option value="2" <?php if(isset($post) && ($post['thanhtoan'] == 2)) { echo "selected"; } ?>>Chuyển Khoản</option>
                       <option value="1" <?php if(isset($post) && ($post['thanhtoan'] == 1)) { echo "selected"; } ?>>Đã Thanh Toán</option>
                     </select>
                   </div>
@@ -89,7 +90,13 @@
                           <?php echo $value['ThoiGian']; ?>
                         </td>
                         <td>
-                          <?php echo $value['ThanhToan'] == 0 ? "Chưa thanh toán" : "Đã thanh toán"; ?>
+                          <?php if($value['ThanhToan'] == 0){ ?>
+                            Chưa thanh toán
+                          <?php }else if($value['ThanhToan'] == 1){ ?>
+                            Đã thanh toán
+                          <?php }else if($value['ThanhToan'] == 2){ ?>
+                            Chuyển khoản
+                          <?php } ?>
                         </td>
                         <td>
                           <?php if($value['TrangThai'] == 0){ ?>
