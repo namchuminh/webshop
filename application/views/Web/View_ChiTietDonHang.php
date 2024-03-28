@@ -86,7 +86,11 @@
                               <p style="margin-left: 5px;"><?php echo number_format($detail[0]['TongTien']) ?> VND</p>
                           </span>
                         </div>
-                        <a class="btn btn-fill-out btn-sm" href="<?php echo base_url('khach-hang/'); ?>">Quay Lại</a>
+                        <a class="btn btn-dark btn-sm" href="<?php echo base_url('khach-hang/'); ?>">Quay Lại</a>
+
+                        <?php if(($detail[0]['TrangThai'] != 3) && ($detail[0]['TrangThai'] != 4) && ($detail[0]['TrangThai'] != 0)){ ?>
+                            <a class="btn btn-fill-out btn-sm" href="<?php echo base_url('khach-hang/don-hang/'.$detail[0]['MaHoaDon'].'/huy/'); ?>">Hủy Đơn</a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

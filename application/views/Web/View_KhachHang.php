@@ -92,7 +92,7 @@
                                                             Đã hoàn tiền
                                                         <?php } ?>
                                                     </td>
-                                                    <td><a href="<?php echo base_url('khach-hang/don-hang/'.$value['MaHoaDon'].'/'); ?>" class="btn btn-fill-out btn-sm">Xem</a></td>
+                                                    <td><a href="<?php echo base_url('khach-hang/don-hang/'.$value['MaHoaDon'].'/xem/'); ?>" class="btn btn-fill-out btn-sm">Xem</a></td>
                                                 </tr>
                                             <?php endforeach ?>
                                         </tbody>

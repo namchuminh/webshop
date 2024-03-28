@@ -101,10 +101,34 @@ class KhachHang extends MY_Controller {
 			return $this->load->view('Web/404', $data);
 		}
 
+
+		if($this->Model_KhachHang->getById($madonhang)[0]['MaKhachHang'] != $this->session->userdata('makhachhang')){
+			return redirect('khach-hang/');
+		}
+
 		$data['title'] = "Chi tiết đơn hàng";
 		$data['list'] = $this->Model_KhachHang->getOrderDetailById($madonhang);
 		$data['detail'] = $this->Model_KhachHang->getById($madonhang);
 		return $this->load->view('Web/View_ChiTietDonHang', $data);
+	}
+
+	public function cancel($madonhang){
+		if(count($this->Model_KhachHang->getOrderDetailById($madonhang)) <= 0){
+			return redirect('khach-hang/');
+		}
+
+		if($this->Model_KhachHang->getById($madonhang)[0]['MaKhachHang'] != $this->session->userdata('makhachhang')){
+			return redirect('khach-hang/');
+		}
+
+		$detail = $this->Model_KhachHang->getById($madonhang);
+
+		if(($detail[0]['TrangThai'] != 3) && ($detail[0]['TrangThai'] != 4) && ($detail[0]['TrangThai'] != 0)){
+			$this->Model_KhachHang->cancel($madonhang);
+			return redirect('khach-hang/don-hang/'.$madonhang.'/xem/');
+		}
+
+		return redirect('khach-hang/don-hang/'.$madonhang.'/xem/');
 	}
 }
 

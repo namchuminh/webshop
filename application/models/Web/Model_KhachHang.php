@@ -18,7 +18,7 @@ class Model_KhachHang extends CI_Model {
 
 
 	public function getOrderById($makhachhang){
-		$sql = "SELECT * FROM hoadon WHERE MaKhachHang = ?";
+		$sql = "SELECT * FROM hoadon WHERE MaKhachHang = ? ORDER BY MaHoaDon DESC";
 		$result = $this->db->query($sql, array($makhachhang));
 		return $result->result_array();
 	}
@@ -40,6 +40,12 @@ class Model_KhachHang extends CI_Model {
 		$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.MaHoaDon = ?";
 		$result = $this->db->query($sql, array($MaHoaDon));
 		return $result->result_array();
+	}
+
+	public function cancel($MaHoaDon){
+		$sql = "UPDATE `hoadon` SET `TrangThai` = 0 WHERE MaHoaDon = ?";
+		$result = $this->db->query($sql, array($MaHoaDon));
+		return $result;
 	}
 }	
 
