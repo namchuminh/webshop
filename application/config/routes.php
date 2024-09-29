@@ -98,6 +98,8 @@ $route['gio-hang/xoa/(:any)'] = 'Web/GioHang/delete/$1';
 $route['gio-hang/giam-gia/(:any)'] = 'Web/GioHang/code/$1';
 
 $route['thanh-toan'] = 'Web/ThanhToan';
+$route['thanh-toan/chuyen-khoan'] = 'Web/ThanhToan/checkPay';
+$route['thanh-toan/thanh-cong'] = 'Web/ThanhToanThanhCong';
 
 $route['khach-hang'] = 'Web/KhachHang';
 $route['khach-hang/sua'] = 'Web/KhachHang/update';

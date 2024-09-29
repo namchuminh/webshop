@@ -29,6 +29,7 @@ class CauHinh extends CI_Controller {
 			$chutaikhoan = $this->input->post('chutaikhoan');
 			$sotaikhoan = $this->input->post('sotaikhoan');
 			$apikey = $this->input->post('apikey');
+			$nganhang = $this->input->post('nganhang');
 
 			if(empty($tenwebsite) || empty($motaweb) || empty($diachi) || empty($email) || empty($sodienthoai) || empty($phiship) || empty($mienphiship)){
 				$data['error'] = "Vui lòng nhập đủ thông tin!";
@@ -73,7 +74,7 @@ class CauHinh extends CI_Controller {
 				$qrnganhang = base_url('uploads')."/".$img['file_name'];
 			}
 
-			$this->Model_CauHinh->update($tenwebsite,$motaweb,$logo,$diachi,$email,$sodienthoai,$phiship,$mienphiship,$qrnganhang,$chutaikhoan,$sotaikhoan,$apikey);
+			$this->Model_CauHinh->update($tenwebsite,$motaweb,$logo,$diachi,$email,$sodienthoai,$phiship,$mienphiship,$qrnganhang,$chutaikhoan,$sotaikhoan,$apikey,$nganhang);
 			$data['success'] = "Lưu cấu hình thành công!";
 			$data['detail'] = $this->Model_CauHinh->getAll();
 			return $this->load->view('Admin/View_CauHinh', $data);

@@ -30,10 +30,14 @@
                 <div class="text-center order_complete">
                     <i class="fas fa-check-circle"></i>
                     <div class="heading_s1">
-                    <h3>Đặt hàng thành công!</h3>
+                    <?php if(isset($_GET['madonhang'])){ ?>
+                        <h3>Thanh toán thành công!</h3>
+                    <?php }else{ ?>
+                        <h3>Đặt hàng thành công!</h3>
+                    <?php } ?>
                     </div>
                     <p>Cảm ơn bạn đã đặt hàng! Chúng tôi đã tiếp nhận đơn hàng của bạn, đơn hàng sẽ được xử lý sớm nhất, vui lòng kiểm tra trạng thái đơn hàng tại trang <a href="<?php echo base_url('khach-hang/'); ?>">khách hàng!</a></p>
-                    <a href="<?php echo base_url('san-pham/'); ?>" class="btn btn-fill-out">Tiếp Tục Mua Sắm</a>
+                    <a href="<?php echo base_url('khach-hang/don-hang/'.$madonhang.'/xem/'); ?>" class="btn btn-fill-out">Xem Đơn Hàng</a>
                 </div>
             </div>
         </div>

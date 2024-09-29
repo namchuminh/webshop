@@ -80,17 +80,26 @@
                     <input type="number" class="form-control" placeholder="Miễn phí giao hàng" name="mienphiship" value="<?php echo $detail[0]['MienPhiShip']; ?>">
                   </div>
                 </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ten">Tên Ngân Hàng</label>
+                    <select class="form-control" name="nganhang">
+                      <option value="mbbank" <?php echo $detail[0]['NganHang'] == "mbbank" ? "selected" : "" ?>>MB BANK</option>
+                      <option value="vietinbank" <?php echo $detail[0]['NganHang'] == "vietinbank" ? "selected" : "" ?>>Vietinbank</option>
+                    </select>
+                  </div>
+                </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="ten">Chủ Tài Khoản (MB BANK)</label>
+                    <label for="ten">Chủ Tài Khoản</label>
                     <input type="text" class="form-control" placeholder="CHỦ TÀI KHOẢN" name="chutaikhoan" value="<?php echo $detail[0]['ChuTaiKhoan']; ?>">
                   </div>
                 </div>
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="ten">Số Tài Khoản (MB BANK)</label>
+                    <label for="ten">Số Tài Khoản</label>
                     <input type="text" class="form-control" placeholder="SỐ TÀI KHOẢN" name="sotaikhoan" value="<?php echo $detail[0]['SoTaiKhoan']; ?>">
                   </div>
                 </div>

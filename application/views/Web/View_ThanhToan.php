@@ -62,7 +62,7 @@
                 <input type="hidden" name="tinhhuyenxa" class="tinhhuyenxa">
                 <div class="form-group mb-3">
                     <label class="label mb-2">Địa chỉ nhận hàng</label>
-                    <input class="form-control" required="" type="text" name="diachi" placeholder="Địa chỉ nhận hàng *">
+                    <input class="form-control diachi" required="" type="text" name="diachi" placeholder="Địa chỉ nhận hàng *">
                 </div>
             </div>
             <div class="col-md-6">
@@ -137,13 +137,13 @@
                             <div class="custome-radio chuyenkhoan">
                                 <input class="form-check-input" type="radio" name="payment_option" id="exampleRadios4" value="option4">
                                 <label class="form-check-label" for="exampleRadios4">Chuyển Khoản</label>
-                                <p data-method="option4" class="payment-text">Hệ thống sẽ tự động xác nhận đơn hàng khi bạn chuyển khoản qua QR của cửa hàng.</p>
+                                <p data-method="option4" class="payment-text payment-text1"></p>
                                 <div class="maqr"></div>
                             </div>
                         </div>
                     </div>
                     <input type="hidden" class="thanhtoan" name="thanhtoan" value="0">
-                    <button type="submit" class="btn btn-fill-out btn-block">Đặt Hàng</button>
+                    <button type="submit" class="btn btn-fill-out btn-block btn-dathang">Đặt Hàng</button>
                 </div>
             </div>
         </form>
@@ -161,13 +161,32 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $(".chuyenkhoan").click(function(e){
-            $(".maqr").html('<img src="https://api.vietqr.io/image/mbbank-<?php echo $config[0]['SoTaiKhoan']; ?>-fTpTJka.jpg?accountName=<?php echo $config[0]['ChuTaiKhoan']; ?>&amp;amount=<?php echo $_SESSION['sumCart'] + $phiship ?>&amp;addInfo=<?php echo $_SESSION['noidung']; ?>">');
+            $(".maqr").html('<img src="https://api.vietqr.io/image/<?php echo $config[0]['NganHang']; ?>-<?php echo $config[0]['SoTaiKhoan']; ?>-fTpTJka.jpg?accountName=<?php echo $config[0]['ChuTaiKhoan']; ?>&amp;amount=<?php echo $_SESSION['sumCart'] + $phiship ?>&amp;addInfo=<?php echo $_SESSION['noidung']; ?>">');
             $(".thanhtoan").val(2);
+            $(".btn-dathang").hide();
+            
+            let intervalId = setInterval(function(){
+                let tinhhuyenxa = $(".tinhhuyenxa").val();
+                let diachi = $(".diachi").val();
+
+                if(tinhhuyenxa == ""){
+                    $(".payment-text1").html('<span style="color: red;">Vui lòng nhập đủ thông tin giao hàng trước khi chuyển khoản!</span>')
+                }else{
+                    let url_check_bank = '<?php echo base_url('thanh-toan/chuyen-khoan/'); ?>';
+                    $.post(url_check_bank, { tinhhuyenxa, diachi }, function(data){
+                        if(!isNaN(data)){
+                            window.location.href = '<?php echo base_url('thanh-toan/thanh-cong/?madonhang='); ?>' + data
+                        }
+                    });
+                }
+
+            }, 3000);
         });
 
         $(".nhanhang").click(function(e){
             $(".maqr").empty();
             $(".thanhtoan").val(0);
+            $(".btn-dathang").show();
         });
     });
 </script>
@@ -247,6 +266,7 @@
         $('#xa').on('change', function () {
             selectedXaName = $('#xa option:selected').data('name'); // Lấy tên xã
             $(".tinhhuyenxa").val(selectedXaName + ", " + selectedHuyenName + ", " + selectedTinhName);
+            $(".payment-text1").html("Quyét QR chuyển khoản bên dưới hệ thống sẽ tự động xác nhận thanh toán.")
         });
 
         // Load tỉnh khi trang được mở

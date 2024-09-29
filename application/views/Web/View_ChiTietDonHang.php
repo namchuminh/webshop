@@ -85,6 +85,10 @@
                               <b>Tổng Tiền: </b>
                               <p style="margin-left: 5px;"><?php echo number_format($detail[0]['TongTien']) ?> VND</p>
                           </span>
+                          <span class="d-flex m-1">
+                              <b>Thanh Toán: </b>
+                              <p style="margin-left: 5px;"><?php echo $detail[0]['ThanhToan'] == 2 ? "Chuyển Khoản" : "Tiền Mặt" ?></p>
+                          </span>
                         </div>
                         <a class="btn btn-dark btn-sm" href="<?php echo base_url('khach-hang/'); ?>">Quay Lại</a>
 
