@@ -111,7 +111,7 @@
               <div class="card-footer clearfix" style="background: white;">
                 <a class="btn btn-success not_print" href="<?php echo base_url('admin/hoa-don/'); ?>">Quay Lại</a>
                 <button class="btn btn-primary not_print" onclick="window.print()">In Hóa Đơn</button>
-                <?php if(($detail[0]['ThanhToan'] != 1) && ($detail[0]['TrangThai'] != 0) && ($detail[0]['TrangThai'] != 4)){ ?>
+                <?php if(($detail[0]['ThanhToan'] == 0) && ($detail[0]['TrangThai'] != 0) && ($detail[0]['TrangThai'] != 4)){ ?>
                   <a class="btn btn-warning not_print" href="<?php echo base_url('admin/hoa-don/'.$detail[0]['MaHoaDon'].'/thanh-toan/'); ?>"  style="color: white;">Xác Nhận Thanh Toán</a>
                 <?php } ?>
                 <?php if($detail[0]['TrangThai'] == 1){ ?>

@@ -69,7 +69,7 @@
                     <tr>
                       <th>Mã Hóa Đơn</th>
                       <th>Tên Khách Hàng</th>
-                      <th>Địa Chỉ Nhận</th>
+                      <th width="300px">Địa Chỉ Nhận</th>
                       <th>Số Lượng</th>
                       <th>Giảm Giá</th>
                       <th>Tổng Tiền</th>

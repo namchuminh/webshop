@@ -49,9 +49,9 @@ class ThanhToan extends MY_Controller {
         		return redirect(base_url('thanh-toan/'));
         	}
 
+        	$dathanhtoan = 0;
         	if($thanhtoan == 2){
         		try {
-				  	$dathanhtoan = 0;
 	        		$sotaikhoan = $config[0]['SoTaiKhoan'];
 					$apikey = $config[0]['ApiKey'];
 					$this->syncBank($apikey,$sotaikhoan);
