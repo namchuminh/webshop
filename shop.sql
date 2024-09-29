@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2024 at 09:51 AM
+-- Generation Time: Sep 29, 2024 at 09:05 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -36,15 +36,18 @@ CREATE TABLE `cauhinh` (
   `SoDienThoai` varchar(11) NOT NULL,
   `PhiShip` int(11) NOT NULL,
   `MienPhiShip` int(11) NOT NULL,
-  `QRNganHang` text NOT NULL
+  `QRNganHang` text NOT NULL,
+  `ChuTaiKhoan` varchar(255) NOT NULL,
+  `SoTaiKhoan` varchar(255) NOT NULL,
+  `ApiKey` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `cauhinh`
 --
 
-INSERT INTO `cauhinh` (`TenWebsite`, `MoTaWeb`, `Logo`, `DiaChi`, `Email`, `SoDienThoai`, `PhiShip`, `MienPhiShip`, `QRNganHang`) VALUES
-('Cửa hàng ABC', 'ABCDE', 'http://localhost/webshop/uploads/logo_dark.png', 'Hà Nội', 'lienhe@gmail.com', '0379962045', 30000, 50000, 'http://localhost/webshop/uploads/z5204981674939_cb87935e11dde5ee3dc2641f5eb6d604.jpg');
+INSERT INTO `cauhinh` (`TenWebsite`, `MoTaWeb`, `Logo`, `DiaChi`, `Email`, `SoDienThoai`, `PhiShip`, `MienPhiShip`, `QRNganHang`, `ChuTaiKhoan`, `SoTaiKhoan`, `ApiKey`) VALUES
+('Cửa hàng ABC', 'ABCDE', 'http://localhost/webshop/uploads/logo_dark.png', 'Hà Nội', 'lienhe@gmail.com', '0379962045', 30000, 50000, 'http://localhost/webshop/uploads/z5204981674939_cb87935e11dde5ee3dc2641f5eb6d604.jpg', 'CHU MINH NAM', '1110110246810', 'abcde');
 
 -- --------------------------------------------------------
 
@@ -72,7 +75,15 @@ INSERT INTO `chitiethoadon` (`MaChiTietHoaDon`, `MaHoaDon`, `MaSanPham`, `SoLuon
 (12, 8, 3, 2),
 (13, 9, 11, 1),
 (14, 10, 9, 2),
-(15, 10, 11, 1);
+(15, 10, 11, 1),
+(16, 11, 12, 1),
+(17, 11, 11, 1),
+(18, 11, 13, 1),
+(19, 12, 11, 2),
+(20, 13, 11, 1),
+(21, 14, 11, 2),
+(22, 14, 13, 1),
+(23, 14, 4, 6);
 
 -- --------------------------------------------------------
 
@@ -152,7 +163,11 @@ INSERT INTO `hoadon` (`MaHoaDon`, `MaKhachHang`, `TongTien`, `ThoiGian`, `ThanhT
 (7, 1, 54000, '2024-03-25 22:19:10', 1, NULL, 2, 'a, a, ab, ab', 3),
 (8, 1, 54000, '2024-03-10 18:50:19', 1, 2, 7, '07, Trần Bình, Mai Dịch, Cầu Giấy, Hà Nội', 3),
 (9, 3, 40000, '2024-03-28 14:15:12', 2, NULL, 1, 'Tầng 2, Tòa ABC, Mai Dịch, Cầu Giấy, Hà Nội', 0),
-(10, 3, 60000, '2024-03-28 15:45:05', 2, NULL, 3, 'Tầng 2, Tòa ABC, Mai Dịch, Cầu Giấy, Hà Nội', 1);
+(10, 3, 60000, '2024-03-28 15:45:05', 2, NULL, 3, 'Tầng 2, Tòa ABC, Mai Dịch, Cầu Giấy, Hà Nội', 3),
+(11, 3, 64000, '2024-03-28 15:56:12', 1, NULL, 3, 'Tầng 2, Tòa ABC, Quận XYZ1, Mai Dịch, Cầu Giấy, Hà Nội', 3),
+(12, 3, 50000, '2024-04-10 16:39:11', 1, NULL, 2, 'Tầng 2, Tòa ABC, Quận XYZ1, Mai Dịch, Cầu Giấy, Hà Nội', 4),
+(13, 3, 40000, '2024-04-10 16:43:55', 1, NULL, 1, 'Tầng 2, Tòa ABC, Quận XYZ1, Mai Dịch, Cầu Giấy, Hà Nội', 3),
+(14, 3, 70000, '2024-04-22 16:03:36', 1, 2, 9, 'Số nhà 7, Tòa ABC, Đường Mai Dịch, Mai Dịch, Cầu Giấy, Hà Nội', 0);
 
 -- --------------------------------------------------------
 
@@ -206,7 +221,8 @@ INSERT INTO `lichsunhap` (`MaLichSuNhap`, `MaSanPham`, `MaNhanVien`, `SoLuongCu`
 (3, 11, 1, 0, 15, '2024-03-12 22:10:38'),
 (4, 9, 1, 0, 20, '2024-03-12 22:11:03'),
 (5, 13, 1, -2, 3, '2024-03-21 00:10:26'),
-(6, 12, 1, -2, 3, '2024-03-21 00:10:31');
+(6, 12, 1, -2, 3, '2024-03-21 00:10:31'),
+(7, 13, 1, 4, 9, '2024-04-22 15:52:06');
 
 -- --------------------------------------------------------
 
@@ -252,7 +268,7 @@ CREATE TABLE `magiamgia` (
 
 INSERT INTO `magiamgia` (`MaGiamGia`, `Code`, `SoLuong`, `DaSuDung`, `ThoiGian`, `GiaTriGiam`, `TrangThai`) VALUES
 (1, 'NAMDEPTRAI', 20, 9, '2024-03-13 00:00:00', 10000, 1),
-(2, 'KHACHHANGMOI', 50, 4, '2024-03-20 00:00:00', 20000, 1);
+(2, 'KHACHHANGMOI', 50, 5, '2024-04-25 00:00:00', 20000, 1);
 
 -- --------------------------------------------------------
 
@@ -306,16 +322,16 @@ CREATE TABLE `sanpham` (
 
 INSERT INTO `sanpham` (`MaSanPham`, `TenSanPham`, `DuongDan`, `GiaGoc`, `GiaBan`, `LoaiSanPham`, `AnhChinh`, `HinhAnh`, `MoTaNgan`, `MoTaDai`, `MaChuyenMuc`, `The`, `SoLuong`, `TrangThai`) VALUES
 (3, 'Sản phẩm mẫu 1', 'san-pham-1', 15000, 10000, 1, 'http://localhost/webshop/uploads/0-02-06-a34e8d83e2a099153c1b46471f9c4c82f215479deb14a7108d83acbe062c9fbe_ccc2fc1010bf2933.jpg', 'http://localhost/webshop/uploads/z4617362741623_98c0302df70bfe02dd581fa8a0e35aa611.jpg#http://localhost/webshop/uploads/z4617362745335_4456bfd0f397a69bb165e385ba8916cb3.jpg#http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e10.jpg#http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b2519.jpg#http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d830.jpg', '<p><strong>Thú bông voi con màu xám</strong> có thiết kế ngộ nghĩnh, dễ thương, sử dụng chất liệu bông an toàn cho sức khỏe của bé. Bề mặt vải bên ngoài mềm mại, không xổ lông, không gây ảnh hưởng tới hệ hô hấp của trẻ khi tiếp xúc gần, giúp ba mẹ an tâm khi con vui đùa.</p>', '<p><strong>Thú bông voi con màu xám</strong> có thiết kế ngộ nghĩnh, dễ thương, sử dụng chất liệu bông an toàn cho sức khỏe của bé. Bề mặt vải bên ngoài mềm mại, không xổ lông, không gây ảnh hưởng tới hệ hô hấp của trẻ khi tiếp xúc gần, giúp ba mẹ an tâm khi con vui đùa.</p><figure class=\"image\"><img style=\"aspect-ratio:450/450;\" src=\"https://media.bibomart.com.vn/media/wysiwyg/2021/2022/0-02-06-a34e8d83e2a099153c1b46471f9c4c82f215479deb14a7108d83acbe062c9fbe_ccc2fc1010bf2933.jpg\" alt=\"thu-bong-voi-con-mau-xam\" width=\"450\" height=\"450\"></figure><p><i>Thú bông voi con màu xám</i></p><h3><strong>Đặc điểm nổi bật của sản phẩm</strong></h3><p>- Thú bông voi con màu xám sử dụng chất liệu bông êm ái, đàn hồi tốt và lớp vải ngoài mềm mại, không gây ngứa da, kích ứng cho bé khi tiếp xúc.</p><p>- Sản phẩm có tông màu xám trầm chủ đạo và thiết kế ngộ nghĩnh với chiếc vòi dài đặc trưng của voi con, kích thích trí tò mò của bé về thế giới động vật xung quanh.</p><p>- Ba mẹ có thể dành tặng thú bông cho bé như một món quà nhỏ hoặc sử dụng để trang trí cho căn phòng ngủ của con yêu.</p>', 1, 'sản phẩm, abc, def', 32, 0),
-(4, 'Sản phẩm mẫu 2', 'mau-hai', 19000, 10000, 3, 'http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e.jpg', 'http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e.jpg', '<p>Mô tả ngắn</p>', '<p>abcde</p>', 1, 'abc,def', 36, 1),
+(4, 'Sản phẩm mẫu 2', 'mau-hai', 19000, 10000, 3, 'http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e.jpg', 'http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e.jpg', '<p>Mô tả ngắn</p>', '<p>abcde</p>', 1, 'abc,def', 30, 1),
 (5, 'Sản phẩm 1', 'san-pham-1', 15000, 15000, 3, 'http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d812.jpg', 'http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e4.jpg#http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b259.jpg#http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d813.jpg', '<p>abcde&nbsp;</p>', '<p>mô tả chi tiết</p>', 1, 'chuối, chuối nam mĩ, chuối 1kg', 7, 1),
 (6, 'Sản phẩm 4', 'san-pham-4', 60000, 30000, 3, 'http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d817.jpg', 'http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e5.jpg#http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b2511.jpg#http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d818.jpg', '<p>abcde</p>', '<p>abce</p>', 1, 'chuối, chuối nam mĩ, chuối 1kg', 0, 1),
 (7, 'Sản phẩm 6', 'san-pham-6', 200000, 150000, 1, 'http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d819.jpg', 'http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b2512.jpg#http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d820.jpg', '<p>abcde</p>', '<p>abce</p>', 1, 'chuối, chuối nam mĩ, chuối 1kg', 0, 1),
 (8, 'Sản phẩm 7', 'san-pham-7', 15000, 5000, 1, 'http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d821.jpg', 'http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e6.jpg#http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b2513.jpg#http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d822.jpg', '<p>abcde</p>', '<p>abcde</p>', 1, 'a,b,c', 0, 1),
 (9, 'Sản phẩm 8', 'san-pham-8', 15000, 10000, 1, 'http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d823.jpg', 'http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e7.jpg#http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b2514.jpg#http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d824.jpg', '<p>ab</p>', '<p>ab</p>', 1, 'apple, iphone 14, iphone', 18, 1),
 (10, 'Sản phẩm 99', 'san-pham-99', 20000, 15000, 1, 'http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d825.jpg', 'http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e8.jpg#http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b2515.jpg#http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d826.jpg', '<p>abc</p>', '<p>a</p>', 1, 'apple, iphone 14, iphone', 0, 1),
-(11, 'Sản phẩm 100', 'san-pham-1000', 15000, 10000, 1, 'http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d827.jpg', 'http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b2516.jpg#http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d828.jpg', '<p>abcde</p>', '<p>abce</p>', 1, 'apple, iphone 14, iphone', 14, 1),
-(12, 'Sản phẩm 15', 'san-pham-1', 15000, 14000, 2, 'http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d829.jpg', 'http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b2517.jpg', '<p>a</p>', '<p>a</p>', 2, 'a,b,c1', 5, 1),
-(13, 'Sản phẩm 166', 'san-pham-166', 13000, 10000, 2, 'http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b2518.jpg', 'http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e9.jpg', '<p>abc</p>', '<p>abcde</p>', 1, 'chuối, chuối nam mĩ, chuối 1kg', 5, 1);
+(11, 'Sản phẩm 100', 'san-pham-1000', 15000, 10000, 1, 'http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d827.jpg', 'http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b2516.jpg#http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d828.jpg', '<p>abcde</p>', '<p>abce</p>', 1, 'apple, iphone 14, iphone', 8, 1),
+(12, 'Sản phẩm 15', 'san-pham-1', 15000, 14000, 2, 'http://localhost/webshop/uploads/z4617362817818_39cacdb57658e537cb0e22dc18e885d829.jpg', 'http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b2517.jpg', '<p>a</p>', '<p>a</p>', 2, 'a,b,c1', 4, 1),
+(13, 'Sản phẩm 166', 'san-pham-166', 13000, 10000, 2, 'http://localhost/webshop/uploads/z4617362804277_275c9f23eb1124b7f6a8496671f60b2518.jpg', 'http://localhost/webshop/uploads/z4617362764788_9dae16f7c421e020eeb4418f62eeb52e9.jpg', '<p>abc</p>', '<p>abcde</p>', 1, 'chuối, chuối nam mĩ, chuối 1kg', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -431,7 +447,7 @@ ALTER TABLE `tintuc`
 -- AUTO_INCREMENT for table `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
-  MODIFY `MaChiTietHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `MaChiTietHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `chuyenmuc`
@@ -449,7 +465,7 @@ ALTER TABLE `giaodien`
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MaHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `MaHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
@@ -461,7 +477,7 @@ ALTER TABLE `khachhang`
 -- AUTO_INCREMENT for table `lichsunhap`
 --
 ALTER TABLE `lichsunhap`
-  MODIFY `MaLichSuNhap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `MaLichSuNhap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `lienhe`

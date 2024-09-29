@@ -40,16 +40,28 @@
                 <div class="form-group mb-3">
                     <input class="form-control" required="" type="email" name="email" value="<?php echo $_SESSION['email']; ?>" placeholder="Email *" disabled>
                 </div>
+                <hr>
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control" name="tinh" required="" placeholder="Tỉnh / Thành Phố *">
+                    <label class="label mb-2">Chọn Tỉnh / Thành Phố</label>
+                    <select class="form-control" id="tinh" name="tinh" required>
+                        <option value="">Chọn Tỉnh / Thành Phố *</option>
+                    </select>
                 </div>
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control" name="huyen" required="" placeholder="Quận / Huyện *">
+                    <label class="label mb-2">Chọn Quận / Huyện</label>
+                    <select class="form-control" id="huyen" name="huyen" required>
+                        <option value="">Chọn Quận / Huyện *</option>
+                    </select>
                 </div>
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control" name="xa" required="" placeholder="Xã / Phường *">
+                    <label class="label mb-2">Chọn Xã / Phường</label>
+                    <select class="form-control" id="xa" name="xa" required>
+                        <option value="">Chọn Xã / Phường *</option>
+                    </select>
                 </div>
+                <input type="hidden" name="tinhhuyenxa" class="tinhhuyenxa">
                 <div class="form-group mb-3">
+                    <label class="label mb-2">Địa chỉ nhận hàng</label>
                     <input class="form-control" required="" type="text" name="diachi" placeholder="Địa chỉ nhận hàng *">
                 </div>
             </div>
@@ -125,7 +137,7 @@
                             <div class="custome-radio chuyenkhoan">
                                 <input class="form-check-input" type="radio" name="payment_option" id="exampleRadios4" value="option4">
                                 <label class="form-check-label" for="exampleRadios4">Chuyển Khoản</label>
-                                <p data-method="option4" class="payment-text">Nội dung: KH <?php echo $_SESSION['khachhang'] ?> TTDH <?php echo $_SESSION['sumCart'] + $phiship ?> VND</p>
+                                <p data-method="option4" class="payment-text">Hệ thống sẽ tự động xác nhận đơn hàng khi bạn chuyển khoản qua QR của cửa hàng.</p>
                                 <div class="maqr"></div>
                             </div>
                         </div>
@@ -137,13 +149,19 @@
         </form>
     </div>
 </div>
+<style type="text/css">
+    .form-control:disabled, .form-control[readonly] {
+        background-color: white;
+        cursor: not-allowed;
+    }
+</style>
 <?php require(APPPATH.'views/web/layouts/footer.php'); ?>
 
 
 <script type="text/javascript">
     $(document).ready(function(){
         $(".chuyenkhoan").click(function(e){
-            $(".maqr").html('<img src="<?php echo $config[0]['QRNganHang']; ?>">');
+            $(".maqr").html('<img src="https://api.vietqr.io/image/mbbank-<?php echo $config[0]['SoTaiKhoan']; ?>-fTpTJka.jpg?accountName=<?php echo $config[0]['ChuTaiKhoan']; ?>&amp;amount=<?php echo $_SESSION['sumCart'] + $phiship ?>&amp;addInfo=<?php echo $_SESSION['noidung']; ?>">');
             $(".thanhtoan").val(2);
         });
 
@@ -151,5 +169,87 @@
             $(".maqr").empty();
             $(".thanhtoan").val(0);
         });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        let selectedTinhName = '';
+        let selectedHuyenName = '';
+        let selectedXaName = '';
+
+        // Lấy danh sách tỉnh
+        function loadTinh() {
+            $.ajax({
+                url: 'https://provinces.open-api.vn/api/p/', // API lấy danh sách tỉnh
+                method: 'GET',
+                success: function (data) {
+                    $('#tinh').html('<option value="">Chọn Tỉnh / Thành Phố *</option>');
+                    data.forEach(function (item) {
+                        $('#tinh').append('<option value="' + item.code + '" data-name="' + item.name + '">' + item.name + '</option>');
+                    });
+                },
+                error: function () {
+                    alert('Không thể lấy danh sách tỉnh');
+                }
+            });
+        }
+
+        // Khi người dùng chọn tỉnh
+        $('#tinh').on('change', function () {
+            var tinhCode = $(this).val();
+            selectedTinhName = $('#tinh option:selected').data('name'); // Lấy tên tỉnh
+            if (tinhCode) {
+                $.ajax({
+                    url: 'https://provinces.open-api.vn/api/p/' + tinhCode + '?depth=2', // API lấy danh sách huyện theo tỉnh
+                    method: 'GET',
+                    success: function (data) {
+                        $('#huyen').html('<option value="">Chọn Quận / Huyện *</option>');
+                        $('#xa').html('<option value="">Chọn Xã / Phường *</option>'); // Xóa danh sách xã khi thay đổi huyện
+                        data.districts.forEach(function (item) {
+                            $('#huyen').append('<option value="' + item.code + '" data-name="' + item.name + '">' + item.name + '</option>');
+                        });
+                    },
+                    error: function () {
+                        alert('Không thể lấy danh sách huyện');
+                    }
+                });
+            } else {
+                $('#huyen').html('<option value="">Chọn Quận / Huyện *</option>');
+                $('#xa').html('<option value="">Chọn Xã / Phường *</option>');
+            }
+        });
+
+        // Khi người dùng chọn huyện
+        $('#huyen').on('change', function () {
+            var huyenCode = $(this).val();
+            selectedHuyenName = $('#huyen option:selected').data('name'); // Lấy tên huyện
+            if (huyenCode) {
+                $.ajax({
+                    url: 'https://provinces.open-api.vn/api/d/' + huyenCode + '?depth=2', // API lấy danh sách xã theo huyện
+                    method: 'GET',
+                    success: function (data) {
+                        $('#xa').html('<option value="">Chọn Xã / Phường *</option>');
+                        data.wards.forEach(function (item) {
+                            $('#xa').append('<option value="' + item.code + '" data-name="' + item.name + '">' + item.name + '</option>');
+                        });
+                    },
+                    error: function () {
+                        alert('Không thể lấy danh sách xã');
+                    }
+                });
+            } else {
+                $('#xa').html('<option value="">Chọn Xã / Phường *</option>');
+            }
+        });
+
+        // Khi người dùng chọn xã
+        $('#xa').on('change', function () {
+            selectedXaName = $('#xa option:selected').data('name'); // Lấy tên xã
+            $(".tinhhuyenxa").val(selectedXaName + ", " + selectedHuyenName + ", " + selectedTinhName);
+        });
+
+        // Load tỉnh khi trang được mở
+        loadTinh();
     });
 </script>

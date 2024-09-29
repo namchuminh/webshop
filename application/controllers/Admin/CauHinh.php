@@ -26,9 +26,17 @@ class CauHinh extends CI_Controller {
 			$mienphiship = $this->input->post('mienphiship');
 			$logo = $this->Model_CauHinh->getAll()[0]['Logo'];
 			$qrnganhang = $this->Model_CauHinh->getAll()[0]['QRNganHang'];
+			$chutaikhoan = $this->input->post('chutaikhoan');
+			$sotaikhoan = $this->input->post('sotaikhoan');
+			$apikey = $this->input->post('apikey');
 
 			if(empty($tenwebsite) || empty($motaweb) || empty($diachi) || empty($email) || empty($sodienthoai) || empty($phiship) || empty($mienphiship)){
 				$data['error'] = "Vui lòng nhập đủ thông tin!";
+				return $this->load->view('Admin/View_CauHinh', $data);
+			}
+
+			if(empty($chutaikhoan) || empty($sotaikhoan) || empty($apikey)){
+				$data['error'] = "Vui lòng nhập đủ thông tin ngân hàng và Api thanh toán!";
 				return $this->load->view('Admin/View_CauHinh', $data);
 			}
 
@@ -65,8 +73,7 @@ class CauHinh extends CI_Controller {
 				$qrnganhang = base_url('uploads')."/".$img['file_name'];
 			}
 
-			$this->Model_CauHinh->update($tenwebsite,$motaweb,$logo,$diachi,$email,$sodienthoai,$phiship,$mienphiship,$qrnganhang);
-
+			$this->Model_CauHinh->update($tenwebsite,$motaweb,$logo,$diachi,$email,$sodienthoai,$phiship,$mienphiship,$qrnganhang,$chutaikhoan,$sotaikhoan,$apikey);
 			$data['success'] = "Lưu cấu hình thành công!";
 			$data['detail'] = $this->Model_CauHinh->getAll();
 			return $this->load->view('Admin/View_CauHinh', $data);

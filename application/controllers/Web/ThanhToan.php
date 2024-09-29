@@ -30,11 +30,17 @@ class ThanhToan extends MY_Controller {
 	{
 		$data['title'] = "Thanh toán";
 		$cart = $this->session->userdata('cart');
+		$noidung = array(
+			'noidung' => implode('', array_map(fn($i) => $i === 0 ? rand(1, 9) : rand(0, 9), range(0, 9)))
+		);
+		
+		$this->session->set_userdata($noidung);
         $data['list'] = $cart;
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
         	$config = $this->Model_CauHinh->getAll();
         	$makhachhang = $this->session->userdata('makhachhang');
-        	$diachi = $this->input->post('diachi').", ".$this->input->post('xa').", ".$this->input->post('huyen').", ".$this->input->post('tinh');
+        	$diachi = $this->input->post('diachi').", ".$this->input->post('tinhhuyenxa');
+
         	$soluong = 0;
         	$tongtien = 0;
         	$thanhtoan = $this->input->post('thanhtoan');
@@ -42,6 +48,36 @@ class ThanhToan extends MY_Controller {
         	if(($thanhtoan != 0) && ($thanhtoan != 2)){
         		return redirect(base_url('thanh-toan/'));
         	}
+
+        	if($thanhtoan == 2){
+        		try {
+				  	$dathanhtoan = 0;
+	        		$sotaikhoan = $config[0]['SoTaiKhoan'];
+					$apikey = $config[0]['ApiKey'];
+					$this->syncBank($apikey,$sotaikhoan);
+					foreach ($this->historyBank($apikey) as $item) {
+				        if (strpos($item['description'], $this->session->userdata('noidung')) !== false){
+				            if($item['amount'] < $this->session->userdata('sumCart')){
+				            	echo "Số tiền chuyển nhỏ hơn giá trị thanh toán!";
+				            	return;
+				            }else{
+				            	$dathanhtoan = 1;
+				            }
+				            break;
+				        }
+				    }
+
+				    if($thanhtoan == 0){
+				    	echo "Hệ thống chưa nhận được tiền, vui lòng liên hệ nhân viên để được hỗ trợ!";
+				        return;
+				    }
+				}catch(Exception $e) {
+				  	echo "Thanh toán chuyển khoản đang có lỗi, vui lòng chọn thanh toán tiền mặt!";
+				    return;
+				}
+        		
+        	}
+
 
         	foreach($cart as $key => $value){
         		$tongtien += $value['number'] * $value['price'];
@@ -86,6 +122,56 @@ class ThanhToan extends MY_Controller {
         	return $this->load->view('Web/View_ThanhToanThanhCong', $data);
         }
 		return $this->load->view('Web/View_ThanhToan', $data);
+	}
+
+	private function syncBank($apikey,$sotaikhoan){
+		$curl = curl_init();
+	    $data = array(
+	    	'bank_acc_id' => $sotaikhoan,
+	    );
+	    $postdata = json_encode($data);
+
+	    curl_setopt_array($curl, array(
+	        CURLOPT_URL => "https://oauth.casso.vn/v2/sync",
+	        CURLOPT_RETURNTRANSFER => true,
+	        CURLOPT_TIMEOUT => 30,
+	        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	        CURLOPT_CUSTOMREQUEST => "POST",
+	        CURLOPT_POSTFIELDS => $postdata,
+	        CURLOPT_HTTPHEADER => array(
+	            "Authorization: Apikey ".$apikey,
+	            "Content-Type: application/json"
+	        ),
+	    ));
+
+	    $response = curl_exec($curl);
+	    $err = curl_error($curl);
+
+	    curl_close($curl);
+	}
+
+	private function historyBank($apikey){
+		$curl = curl_init();
+
+	    curl_setopt_array($curl, array(
+	      CURLOPT_URL => "https://oauth.casso.vn/v2/transactions?fromDate=2024-04-01&page=1&pageSize=20&sort=DESC",
+	      CURLOPT_RETURNTRANSFER => true,
+	      CURLOPT_TIMEOUT => 30,
+	      CURLOPT_CUSTOMREQUEST => "GET",
+	      CURLOPT_HTTPHEADER => array(
+	        "Authorization: Apikey ".$apikey,
+	        "Content-Type: application/json"
+	      ),
+	    ));
+	    
+	    $response = curl_exec($curl);
+	    $err = curl_error($curl);
+	    
+	    $response = json_decode($response, true);
+
+	    curl_close($curl);
+
+	    return $response['data']['records'];
 	}
 
 }

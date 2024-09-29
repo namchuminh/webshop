@@ -80,6 +80,27 @@
                     <input type="number" class="form-control" placeholder="Miễn phí giao hàng" name="mienphiship" value="<?php echo $detail[0]['MienPhiShip']; ?>">
                   </div>
                 </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ten">Chủ Tài Khoản (MB BANK)</label>
+                    <input type="text" class="form-control" placeholder="CHỦ TÀI KHOẢN" name="chutaikhoan" value="<?php echo $detail[0]['ChuTaiKhoan']; ?>">
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ten">Số Tài Khoản (MB BANK)</label>
+                    <input type="text" class="form-control" placeholder="SỐ TÀI KHOẢN" name="sotaikhoan" value="<?php echo $detail[0]['SoTaiKhoan']; ?>">
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ten">Api Thanh Toán (Casso.vn)</label>
+                    <input type="text" class="form-control" placeholder="API THANH TOÁN CASSO.VN" name="apikey" value="<?php echo $detail[0]['ApiKey']; ?>">
+                  </div>
+                </div>
               </div> 
               <a class="btn btn-success" href="<?php echo base_url('admin/'); ?>">Quay Lại</a>
               <button class="btn btn-primary">Lưu Cấu Hình</button>
