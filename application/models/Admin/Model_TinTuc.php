@@ -39,6 +39,45 @@ class Model_TinTuc extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function checkNumberSearch($search)
+	{
+	    // Tạo câu query cơ bản
+	    $sql = "SELECT * FROM tintuc WHERE TrangThai = 1";
+
+	    // Nếu có từ khóa tìm kiếm, thêm điều kiện LIKE
+	    if (!empty($search)) {
+	        $sql .= " AND TieuDe LIKE ?";
+	        $params = array("%$search%");
+	    } else {
+	        $params = array();
+	    }
+
+	    // Thực thi câu query
+	    $result = $this->db->query($sql, $params);
+	    return $result->num_rows();
+	}
+
+	public function getAllSearch($search, $start = 0, $end = 10)
+	{
+	    // Tạo câu query cơ bản
+	    $sql = "SELECT * FROM tintuc WHERE TrangThai = 1";
+
+	    // Nếu có từ khóa tìm kiếm, thêm điều kiện LIKE
+	    if (!empty($search)) {
+	        $sql .= " AND TieuDe LIKE ?";
+	        $params = array("%$search%", $start, $end);
+	    } else {
+	        $params = array($start, $end);
+	    }
+
+	    // Thêm sắp xếp và phân trang
+	    $sql .= " ORDER BY MaTinTuc DESC LIMIT ?, ?";
+
+	    // Thực thi câu query
+	    $result = $this->db->query($sql, $params);
+	    return $result->result_array();
+	}
+
 	public function getById($MaTinTuc){
 		$sql = "SELECT * FROM tintuc WHERE MaTinTuc = ? AND TrangThai = 1";
 		$result = $this->db->query($sql, array($MaTinTuc));

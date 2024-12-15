@@ -14,6 +14,19 @@ class MaGiamGia extends CI_Controller {
 
 	public function index()
 	{
+		$search = $this->input->get('search');
+
+		if(!empty($search)){
+			$totalRecords = $this->Model_MaGiamGia->checkNumberSearch($search);
+			$recordsPerPage = 10;
+			$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_MaGiamGia->getAllSearch($search);
+			$data['title'] = "Mã giảm giá sản phẩm";
+			return $this->load->view('Admin/View_MaGiamGia', $data);
+		}
+
 		$totalRecords = $this->Model_MaGiamGia->checkNumber();
 		$recordsPerPage = 10;
 		$totalPages = ceil($totalRecords / $recordsPerPage); 

@@ -196,6 +196,29 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
+            <a href="<?php echo base_url('admin/nhan-vien/'); ?>" class="nav-link">
+              <i class="nav-icon fa-solid fa-users"></i>
+              <p>
+                Nhân Viên
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo base_url('admin/nhan-vien/') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh Sách</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('admin/nhan-vien/them/') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Thêm Mới</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fa-solid fa-image"></i>
               <p>

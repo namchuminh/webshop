@@ -44,6 +44,47 @@ class Model_SanPham extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function checkNumberSearch($search)
+	{
+	    // Xử lý giá trị $search để tránh SQL Injection
+	    $search = $this->db->escape_str($search);
+	    
+	    // Thêm điều kiện tìm kiếm vào câu query
+	    $sql = "SELECT sanpham.*, chuyenmuc.TenChuyenMuc 
+	            FROM sanpham, chuyenmuc 
+	            WHERE sanpham.MaChuyenMuc = chuyenmuc.MaChuyenMuc 
+	              AND sanpham.TrangThai = 1 
+	              AND (sanpham.TenSanPham LIKE '%$search%' 
+	                   OR chuyenmuc.TenChuyenMuc LIKE '%$search%')";
+	                   
+	    $result = $this->db->query($sql);
+	    return $result->num_rows();
+	}
+
+	public function getAllSearch($search, $start = 0, $end = 10)
+	{
+	    // Tạo câu query cơ bản
+	    $sql = "SELECT sanpham.*, chuyenmuc.TenChuyenMuc, chuyenmuc.MaChuyenMuc 
+	            FROM sanpham, chuyenmuc 
+	            WHERE sanpham.MaChuyenMuc = chuyenmuc.MaChuyenMuc 
+	              AND sanpham.TrangThai = 1";
+
+	    // Nếu có từ khóa tìm kiếm, thêm điều kiện LIKE
+	    if (!empty($search)) {
+	        $sql .= " AND (sanpham.TenSanPham LIKE ? OR chuyenmuc.TenChuyenMuc LIKE ?)";
+	        $params = array("%$search%", "%$search%", $start, $end);
+	    } else {
+	        $params = array($start, $end);
+	    }
+
+	    // Sắp xếp và phân trang
+	    $sql .= " ORDER BY sanpham.MaSanPham DESC LIMIT ?, ?";
+
+	    // Thực thi câu query
+	    $result = $this->db->query($sql, $params);
+	    return $result->result_array();
+	}
+
 	public function getById($MaSanPham){
 		$sql = "SELECT * FROM sanpham WHERE MaSanPham = ? AND TrangThai = 1";
 		$result = $this->db->query($sql, array($MaSanPham));

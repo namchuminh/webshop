@@ -24,6 +24,14 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
+              <div class="card-header">
+                <form class="w-100 d-flex">
+                  <div class="col-md-3">
+                    <input type="text" name="search" class="form-control" placeholder="Tìm kiếm">
+                  </div>
+                  <button class="btn btn-primary">Tìm Kiếm</button>
+                </form>
+              </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover">

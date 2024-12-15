@@ -36,6 +36,7 @@ class DangNhap extends CI_Controller {
 				    'taikhoan'  => $taikhoan,
 				    'login' => True,
 				    'hoten' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['HoTen'],
+				    'phanquyen' => $this->Model_DangNhap->getInfoByUsername($taikhoan)[0]['PhanQuyen'],
 				);
 				$this->session->set_userdata($newdata);
 				$this->session->set_flashdata('success', 'Đăng nhập thành công');

@@ -14,6 +14,19 @@ class ChuyenMuc extends CI_Controller {
 
 	public function index()
 	{
+		$search = $this->input->get('search');
+
+		if(!empty($search)){
+			$totalRecords = $this->Model_ChuyenMuc->checkNumberSearch($search);
+			$recordsPerPage = 10;
+			$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_ChuyenMuc->getAllSearch($search);
+			$data['title'] = "Chuyên mục sản phẩm";
+			return $this->load->view('Admin/View_ChuyenMuc', $data);
+		}
+
 		$totalRecords = $this->Model_ChuyenMuc->checkNumber();
 		$recordsPerPage = 10;
 		$totalPages = ceil($totalRecords / $recordsPerPage); 

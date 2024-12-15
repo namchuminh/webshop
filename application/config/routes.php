@@ -62,7 +62,11 @@ $route['admin/hoa-don/tim-kiem/(:any)/trang'] = 'Admin/HoaDon/pageSearch/$1';
 $route['admin/hoa-don/thong-ke'] = 'Admin/HoaDon/type';
 $route['admin/hoa-don/thong-ke/(:any)/trang'] = 'Admin/HoaDon/pageType/$1';
 
-
+$route['admin/nhan-vien'] = 'Admin/NhanVien';
+$route['admin/nhan-vien/(:any)/trang'] = 'Admin/NhanVien/page/$1';
+$route['admin/nhan-vien/them'] = 'Admin/NhanVien/add';
+$route['admin/nhan-vien/(:any)/sua'] = 'Admin/NhanVien/update/$1';
+$route['admin/nhan-vien/(:any)/xoa'] = 'Admin/NhanVien/delete/$1';
 
 $route['admin/san-pham'] = 'Admin/SanPham';
 $route['admin/san-pham/(:any)/trang'] = 'Admin/SanPham/page/$1';

@@ -15,6 +15,20 @@ class SanPham extends CI_Controller {
 
 	public function index()
 	{
+		$search = $this->input->get('search');
+
+		if(!empty($search)){
+			$totalRecords = $this->Model_SanPham->checkNumberSearch($search);
+			$recordsPerPage = 10;
+			$totalPages = ceil($totalRecords / $recordsPerPage); 
+
+			$data['totalPages'] = $totalPages;
+			$data['list'] = $this->Model_SanPham->getAllSearch($search);
+			$data['title'] = "Danh sách sản phẩm";
+			return $this->load->view('Admin/View_SanPham', $data);
+		}
+		
+
 		$totalRecords = $this->Model_SanPham->checkNumber();
 		$recordsPerPage = 10;
 		$totalPages = ceil($totalRecords / $recordsPerPage); 

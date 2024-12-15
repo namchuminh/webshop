@@ -38,6 +38,45 @@ class Model_MaGiamGia extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function checkNumberSearch($search)
+	{
+	    // Tạo câu query cơ bản
+	    $sql = "SELECT * FROM magiamgia WHERE TrangThai = 1";
+
+	    // Nếu có từ khóa tìm kiếm, thêm điều kiện LIKE
+	    if (!empty($search)) {
+	        $sql .= " AND Code LIKE ?";
+	        $params = array("%$search%");
+	    } else {
+	        $params = array();
+	    }
+
+	    // Thực thi câu query
+	    $result = $this->db->query($sql, $params);
+	    return $result->num_rows();
+	}
+
+	public function getAllSearch($search, $start = 0, $end = 10)
+	{
+	    // Tạo câu query cơ bản
+	    $sql = "SELECT * FROM magiamgia WHERE TrangThai = 1";
+
+	    // Nếu có từ khóa tìm kiếm, thêm điều kiện LIKE
+	    if (!empty($search)) {
+	        $sql .= " AND Code LIKE ?";
+	        $params = array("%$search%", $start, $end);
+	    } else {
+	        $params = array($start, $end);
+	    }
+
+	    // Thêm sắp xếp và phân trang
+	    $sql .= " ORDER BY MaGiamGia DESC LIMIT ?, ?";
+
+	    // Thực thi câu query
+	    $result = $this->db->query($sql, $params);
+	    return $result->result_array();
+	}
+
 	public function getById($MaGiamGia){
 		$sql = "SELECT * FROM magiamgia WHERE MaGiamGia = ? AND TrangThai = 1";
 		$result = $this->db->query($sql, array($MaGiamGia));
