@@ -10,6 +10,54 @@ class Model_HoaDon extends CI_Model {
 		
 	}
 
+	public function add($tongtien, $thanhtoan, $soluong, $diachi, $tenkhachhang, $sodienthoai, $muataiquan){
+		$data = array(
+	        "TongTien" => $tongtien,
+	        "ThanhToan" => $thanhtoan,
+	        "SoLuong" => $soluong,
+	        "DiaChi" => $diachi,
+	        "SoDienThoai" => $sodienthoai,
+	        "MuaTaiQuan" => $muataiquan,
+	        "TenKhachHang" => $tenkhachhang,
+	    );
+
+	    $this->db->insert('hoadon', $data);
+	    $lastInsertedId = $this->db->insert_id();
+
+	    return $lastInsertedId;
+	}
+
+	public function getProductDetail($mahoadon){
+		$sql = "SELECT sanpham.TenSanPham, sanpham.HinhAnh, chitiethoadon.* FROM chitiethoadon, sanpham WHERE chitiethoadon.MaSanPham = sanpham.MaSanPham AND chitiethoadon.MaHoaDon = ?";
+		$result = $this->db->query($sql, array($mahoadon));
+		return $result->result_array();
+	}
+
+	public function addDetail($mahoadon, $masanpham, $soluong){
+		$data = array(
+	        "MaHoaDon" => $mahoadon,
+	        "MaSanPham" => $masanpham,
+	        "SoLuong" => $soluong
+	    );
+
+	    $this->db->insert('chitiethoadon', $data);
+	    $lastInsertedId = $this->db->insert_id();
+
+	    return $lastInsertedId;
+	}
+
+	public function update($TongTien, $SoLuong, $MaHoaDon){
+		$sql = "UPDATE hoadon SET TongTien = ?, SoLuong = ? WHERE MaHoaDon = ?";
+		$result = $this->db->query($sql, array($TongTien, $SoLuong, $MaHoaDon));
+		return $result;
+	}
+
+	public function deleteProductOrder($machitiethoadon){
+		$sql = "DELETE FROM chitiethoadon WHERE MaChiTietHoaDon = ?";
+		$result = $this->db->query($sql, array($machitiethoadon));
+		return $result;
+	}
+
 	public function checkNumber()
 	{	
 		$sql = "SELECT * FROM hoadon";
@@ -18,13 +66,19 @@ class Model_HoaDon extends CI_Model {
 	}
 
 	public function getAll($start = 0, $end = 10){
-		$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia ORDER BY hoadon.MaHoaDon DESC LIMIT ?, ?";
+		$sql = "SELECT hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.TrangThai FROM hoadon LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia ORDER BY hoadon.MaHoaDon DESC LIMIT ?, ?";
 		$result = $this->db->query($sql, array($start, $end));
 		return $result->result_array();
 	}
 
+	public function getByIdTaiQuan($MaHoaDon){
+		$sql = "SELECT hoadon.*, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam FROM hoadon LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.MaHoaDon = ? AND hoadon.MuaTaiQuan = 1";
+		$result = $this->db->query($sql, array($MaHoaDon));
+		return $result->result_array();
+	}
+
 	public function getById($MaHoaDon){
-		$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.MaHoaDon = ?";
+		$sql = "SELECT khachhang.HoTen, khachhang.SoDienThoai, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.MaHoaDon = ?";
 		$result = $this->db->query($sql, array($MaHoaDon));
 		return $result->result_array();
 	}
@@ -32,6 +86,12 @@ class Model_HoaDon extends CI_Model {
 	public function getDetailById($MaHoaDon){
 		$sql = "SELECT chitiethoadon.*, sanpham.TenSanPham, sanpham.HinhAnh, sanpham.GiaBan FROM chitiethoadon, sanpham WHERE chitiethoadon.MaSanPham = sanpham.MaSanPham AND chitiethoadon.MaHoaDon = ?";
 		$result = $this->db->query($sql, array($MaHoaDon));
+		return $result->result_array();
+	}
+
+	public function getDetailDelete($MaChiTietHoaDon){
+		$sql = "SELECT chitiethoadon.*, sanpham.TenSanPham, sanpham.HinhAnh, sanpham.GiaBan FROM chitiethoadon, sanpham WHERE chitiethoadon.MaSanPham = sanpham.MaSanPham AND chitiethoadon.MaChiTietHoaDon = ?";
+		$result = $this->db->query($sql, array($MaChiTietHoaDon));
 		return $result->result_array();
 	}
 

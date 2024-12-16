@@ -43,7 +43,9 @@
                       <th>Đã Sử Dụng</th>
                       <th>Giá Trị</th>
                       <th>Hết Hạn</th>
-                      <th>Hành Động</th>
+                      <?php if($_SESSION['phanquyen'] == 1){ ?>
+                        <th>Hành Động</th>
+                      <?php } ?>
                     </tr>
                   </thead>
                   <tbody>
@@ -63,6 +65,7 @@
                         <td>
                           <?php echo $value['ThoiGian']; ?>
                         </td>
+                        <?php if($_SESSION['phanquyen'] == 1){ ?>
 	                      <td>
 	                      	<a href="<?php echo base_url('admin/ma-giam-gia/'.$value['MaGiamGia'].'/sua/'); ?>" class="btn btn-primary" style="color: white;">
 	                      		<i class="fas fa-edit"></i>
@@ -73,6 +76,7 @@
                             	<span>XÓA</span>
                            	</a>
 	                      </td>
+                        <?php } ?>
 	                    </tr>
                     <?php endforeach ?>
                   </tbody>

@@ -46,7 +46,9 @@
                       <th>Số Lượng</th>
                       <th>Loại Sản Phẩm</th>
                       <th>Nhập Số Lượng</th>
-                      <th>Hành Động</th>
+                      <?php if($_SESSION['phanquyen'] == 1){ ?>
+                        <th>Hành Động</th>
+                      <?php } ?>
                     </tr>
                   </thead>
                   <tbody>
@@ -75,11 +77,14 @@
                             <i class="fa-solid fa-plus"></i>
                               <span>NHẬP SỐ LƯỢNG</span>
                             </a>
-                          <a href="<?php echo base_url('admin/san-pham/'.$value['MaSanPham'].'/lich-su/'); ?>" class="btn btn-info" style="color: white;">
-                            <i class="fa-solid fa-clipboard-list"></i>
-                              <span>LỊCH SỬ NHẬP</span>
-                            </a>
+                            <?php if($_SESSION['phanquyen'] == 1){ ?>
+                              <a href="<?php echo base_url('admin/san-pham/'.$value['MaSanPham'].'/lich-su/'); ?>" class="btn btn-info" style="color: white;">
+                              <i class="fa-solid fa-clipboard-list"></i>
+                                <span>LỊCH SỬ NHẬP</span>
+                              </a>
+                          <?php } ?>
                         </td>
+                        <?php if($_SESSION['phanquyen'] == 1){ ?>
 	                      <td>
 	                      	<a href="<?php echo base_url('admin/san-pham/'.$value['MaSanPham'].'/sua/'); ?>" class="btn btn-primary" style="color: white;">
 	                      		<i class="fas fa-edit"></i>
@@ -90,6 +95,7 @@
                             	<span>XÓA</span>
                            	</a>
 	                      </td>
+                        <?php } ?>
 	                    </tr>
                     <?php endforeach ?>
                   </tbody>

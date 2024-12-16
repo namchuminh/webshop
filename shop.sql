@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2024 at 03:44 PM
+-- Generation Time: Dec 16, 2024 at 01:01 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -154,13 +154,16 @@ INSERT INTO `giaodien` (`MaGiaoDien`, `MaChuyenMuc`, `HinhAnh`, `LoaiGiaoDien`, 
 
 CREATE TABLE `hoadon` (
   `MaHoaDon` int(11) NOT NULL,
-  `MaKhachHang` int(11) NOT NULL,
+  `MaKhachHang` int(11) DEFAULT NULL,
   `TongTien` int(11) NOT NULL,
   `ThoiGian` datetime NOT NULL DEFAULT current_timestamp(),
   `ThanhToan` int(11) NOT NULL,
   `MaGiamGia` int(11) DEFAULT NULL,
   `SoLuong` int(11) NOT NULL,
   `DiaChi` text NOT NULL,
+  `TenKhachHang` varchar(255) DEFAULT NULL,
+  `SoDienThoai` varchar(11) DEFAULT NULL,
+  `MuaTaiQuan` int(11) NOT NULL DEFAULT 0,
   `TrangThai` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -168,20 +171,21 @@ CREATE TABLE `hoadon` (
 -- Dumping data for table `hoadon`
 --
 
-INSERT INTO `hoadon` (`MaHoaDon`, `MaKhachHang`, `TongTien`, `ThoiGian`, `ThanhToan`, `MaGiamGia`, `SoLuong`, `DiaChi`, `TrangThai`) VALUES
-(7, 1, 54000, '2024-03-25 22:19:10', 1, NULL, 2, 'a, a, ab, ab', 3),
-(8, 1, 54000, '2024-03-10 18:50:19', 1, 2, 7, '07, Trần Bình, Mai Dịch, Cầu Giấy, Hà Nội', 3),
-(9, 3, 40000, '2024-03-28 14:15:12', 2, NULL, 1, 'Tầng 2, Tòa ABC, Mai Dịch, Cầu Giấy, Hà Nội', 1),
-(10, 3, 60000, '2024-03-28 15:45:05', 2, NULL, 3, 'Tầng 2, Tòa ABC, Mai Dịch, Cầu Giấy, Hà Nội', 1),
-(11, 3, 64000, '2024-03-28 15:56:12', 1, NULL, 3, 'Tầng 2, Tòa ABC, Quận XYZ1, Mai Dịch, Cầu Giấy, Hà Nội', 3),
-(12, 3, 50000, '2024-04-10 16:39:11', 1, NULL, 2, 'Tầng 2, Tòa ABC, Quận XYZ1, Mai Dịch, Cầu Giấy, Hà Nội', 4),
-(13, 3, 40000, '2024-04-10 16:43:55', 1, NULL, 1, 'Tầng 2, Tòa ABC, Quận XYZ1, Mai Dịch, Cầu Giấy, Hà Nội', 3),
-(14, 3, 70000, '2024-04-22 16:03:36', 1, 2, 9, 'Số nhà 7, Tòa ABC, Đường Mai Dịch, Mai Dịch, Cầu Giấy, Hà Nội', 0),
-(17, 3, 40000, '2024-09-29 14:10:45', 1, NULL, 1, 'Tầng 2 số nhà 3, Ngõ ABC, Đường XYZ, Phường Giảng Võ, Quận Ba Đình, Thành phố Hà Nội', 1),
-(18, 3, 40000, '2024-09-29 14:27:56', 2, NULL, 1, 'Tầng 2 số nhà 3, Ngõ ABC, Đường XYZ, Phường Phú Diễn, Quận Bắc Từ Liêm, Thành phố Hà Nội', 1),
-(24, 3, 5000, '2024-09-29 16:48:01', 2, NULL, 1, 'Tầng 2 số nhà 3, Ngõ ABC, Đường XYZ, Xã Duyên Hà, Huyện Thanh Trì, Thành phố Hà Nội', 1),
-(25, 3, 5000, '2024-09-29 16:49:26', 2, NULL, 1, 'Tầng 2 số nhà 3, Ngõ ABC, Đường XYZ, Phường Tràng Tiền, Quận Hoàn Kiếm, Thành phố Hà Nội', 1),
-(26, 3, 3000000, '2024-10-18 15:04:55', 0, NULL, 3, 'Tầng 2 số nhà 3, Ngõ ABC, Đường XYZ, Thị trấn Cần Thạnh, Huyện Cần Giờ, Thành phố Hồ Chí Minh', 1);
+INSERT INTO `hoadon` (`MaHoaDon`, `MaKhachHang`, `TongTien`, `ThoiGian`, `ThanhToan`, `MaGiamGia`, `SoLuong`, `DiaChi`, `TenKhachHang`, `SoDienThoai`, `MuaTaiQuan`, `TrangThai`) VALUES
+(7, 1, 54000, '2024-03-25 22:19:10', 1, NULL, 2, 'a, a, ab, ab', NULL, NULL, 0, 3),
+(8, 1, 54000, '2024-03-10 18:50:19', 1, 2, 7, '07, Trần Bình, Mai Dịch, Cầu Giấy, Hà Nội', NULL, NULL, 0, 3),
+(9, 3, 40000, '2024-03-28 14:15:12', 2, NULL, 1, 'Tầng 2, Tòa ABC, Mai Dịch, Cầu Giấy, Hà Nội', NULL, NULL, 0, 1),
+(10, 3, 60000, '2024-03-28 15:45:05', 2, NULL, 3, 'Tầng 2, Tòa ABC, Mai Dịch, Cầu Giấy, Hà Nội', NULL, NULL, 0, 1),
+(11, 3, 64000, '2024-03-28 15:56:12', 1, NULL, 3, 'Tầng 2, Tòa ABC, Quận XYZ1, Mai Dịch, Cầu Giấy, Hà Nội', NULL, NULL, 0, 3),
+(12, 3, 50000, '2024-04-10 16:39:11', 1, NULL, 2, 'Tầng 2, Tòa ABC, Quận XYZ1, Mai Dịch, Cầu Giấy, Hà Nội', NULL, NULL, 0, 4),
+(13, 3, 40000, '2024-04-10 16:43:55', 1, NULL, 1, 'Tầng 2, Tòa ABC, Quận XYZ1, Mai Dịch, Cầu Giấy, Hà Nội', NULL, NULL, 0, 3),
+(14, 3, 70000, '2024-04-22 16:03:36', 1, 2, 9, 'Số nhà 7, Tòa ABC, Đường Mai Dịch, Mai Dịch, Cầu Giấy, Hà Nội', NULL, NULL, 0, 0),
+(17, 3, 40000, '2024-09-29 14:10:45', 1, NULL, 1, 'Tầng 2 số nhà 3, Ngõ ABC, Đường XYZ, Phường Giảng Võ, Quận Ba Đình, Thành phố Hà Nội', NULL, NULL, 0, 1),
+(18, 3, 40000, '2024-09-29 14:27:56', 2, NULL, 1, 'Tầng 2 số nhà 3, Ngõ ABC, Đường XYZ, Phường Phú Diễn, Quận Bắc Từ Liêm, Thành phố Hà Nội', NULL, NULL, 0, 1),
+(24, 3, 5000, '2024-09-29 16:48:01', 2, NULL, 1, 'Tầng 2 số nhà 3, Ngõ ABC, Đường XYZ, Xã Duyên Hà, Huyện Thanh Trì, Thành phố Hà Nội', NULL, NULL, 0, 1),
+(25, 3, 5000, '2024-09-29 16:49:26', 2, NULL, 1, 'Tầng 2 số nhà 3, Ngõ ABC, Đường XYZ, Phường Tràng Tiền, Quận Hoàn Kiếm, Thành phố Hà Nội', NULL, NULL, 0, 1),
+(26, 3, 3000000, '2024-10-18 15:04:55', 0, NULL, 3, 'Tầng 2 số nhà 3, Ngõ ABC, Đường XYZ, Thị trấn Cần Thạnh, Huyện Cần Giờ, Thành phố Hồ Chí Minh', NULL, NULL, 0, 1),
+(27, NULL, 0, '2024-12-16 17:21:45', 0, NULL, 0, 'Tầng 2 số nhà 3, Ngõ ABC, Đường XYZ', 'Nguyen Van G', '0379962045', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -308,7 +312,7 @@ CREATE TABLE `nhanvien` (
 
 INSERT INTO `nhanvien` (`MaNhanVien`, `HoTen`, `TaiKhoan`, `MatKhau`, `Email`, `SoDienThoai`, `PhanQuyen`, `TrangThai`) VALUES
 (1, 'Nguyễn Văn An', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', '0888999888', 1, 1),
-(2, 'Nguyễn Văn Bình', 'nguyenvanb', '$2y$10$MscEEymYkcQ6.n7ncrzVB.HBnl88eGlVHmScRJRc8k7gIpf9.tpA2', 'nguyenvanb@gmail.com', '0999666999', 0, 1);
+(2, 'Nguyễn Văn Bình', 'nguyenvanb', '23280a0ad9238d00c62b0272af265c57', 'nguyenvanb@gmail.com', '0999666999', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -465,7 +469,7 @@ ALTER TABLE `tintuc`
 -- AUTO_INCREMENT for table `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
-  MODIFY `MaChiTietHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `MaChiTietHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `chuyenmuc`
@@ -483,7 +487,7 @@ ALTER TABLE `giaodien`
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MaHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `MaHoaDon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `khachhang`

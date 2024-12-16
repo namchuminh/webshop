@@ -29,7 +29,7 @@ class Model_NhanVien extends CI_Model {
         $data = array(
             "HoTen" => $hoten,
             "TaiKhoan" => $taikhoan,
-            "MatKhau" => password_hash($matkhau, PASSWORD_BCRYPT), // Bảo mật mật khẩu
+            "MatKhau" => md5($matkhau), // Bảo mật mật khẩu
             "Email" => $email,
             "SoDienThoai" => $sodienthoai,
             "PhanQuyen" => $phanquyen,
@@ -92,9 +92,9 @@ class Model_NhanVien extends CI_Model {
     }
 
     // Cập nhật thông tin nhân viên
-    public function updateNhanVien($hoten, $taikhoan, $email, $sodienthoai, $phanquyen, $trangthai, $manhanvien){
-        $sql = "UPDATE nhanvien SET HoTen = ?, TaiKhoan = ?, Email = ?, SoDienThoai = ?, PhanQuyen = ?, TrangThai = ? WHERE MaNhanVien = ?";
-        $result = $this->db->query($sql, array($hoten, $taikhoan, $email, $sodienthoai, $phanquyen, $trangthai, $manhanvien));
+    public function updateNhanVien($hoten, $taikhoan, $email, $sodienthoai, $phanquyen, $matkhau, $trangthai, $manhanvien){
+        $sql = "UPDATE nhanvien SET HoTen = ?, TaiKhoan = ?, Email = ?, SoDienThoai = ?, PhanQuyen = ?, MatKhau = ?, TrangThai = ? WHERE MaNhanVien = ?";
+        $result = $this->db->query($sql, array($hoten, $taikhoan, $email, $sodienthoai, $phanquyen, $matkhau, $trangthai, $manhanvien));
         return $result;
     }
 

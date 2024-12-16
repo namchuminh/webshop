@@ -31,6 +31,12 @@ class Model_SanPham extends CI_Model {
 	    return $lastInsertedId;
 	}
 
+	public function getByIdCategory($MaChuyenMuc){
+		$sql = "SELECT * FROM sanpham WHERE MaChuyenMuc = ? AND TrangThai = 1";
+		$result = $this->db->query($sql, array($MaChuyenMuc));
+		return $result->result_array();
+	}
+
 	public function checkNumber()
 	{
 		$sql = "SELECT sanpham.*, chuyenmuc.TenChuyenMuc FROM sanpham,chuyenmuc WHERE sanpham.MaChuyenMuc = chuyenmuc.MaChuyenMuc AND sanpham.TrangThai = 1";

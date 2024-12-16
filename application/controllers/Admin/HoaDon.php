@@ -11,6 +11,8 @@ class HoaDon extends CI_Controller {
 
 		$this->load->model('Admin/Model_HoaDon');
 		$this->load->model('Admin/Model_CauHinh');
+		$this->load->model('Admin/Model_ChuyenMuc');
+		$this->load->model('Admin/Model_SanPham');
 	}
 
 	public function index()
@@ -53,14 +55,96 @@ class HoaDon extends CI_Controller {
 		}
 	}
 
+	public function add(){
+		$data['title'] = "Tạo hóa đơn";
+		if ($this->input->server('REQUEST_METHOD') === 'POST') {
+			$tenkhachhang = $this->input->post('tenkhachhang');
+			$sodienthoai = $this->input->post('sodienthoai');
+			$diachi = $this->input->post('diachi');
+
+			if(empty($tenkhachhang) || empty($sodienthoai) || empty($diachi)){
+				$this->session->set_flashdata('error', 'Vui lòng nhập đủ thông tin khách hàng!');
+				return redirect(base_url('admin/hoa-don/them/')); 
+			}
+
+			$mahoadon = $this->Model_HoaDon->add(0, 0, 0, $diachi, $tenkhachhang, $sodienthoai, 1);
+
+			$this->session->set_flashdata('success', 'Tạo hóa đơn thành công!');
+			return redirect(base_url('admin/hoa-don/them/'.$mahoadon.'/san-pham')); 
+		}
+		return $this->load->view('Admin/View_TaoDonHang', $data);
+	}
+
+	public function addProductOrder($mahoadon){
+		$data['title'] = "Thêm sản phẩm hóa đơn";
+		$data['category'] = $this->Model_ChuyenMuc->getAll(0,1000);
+		$data['list'] = $this->Model_HoaDon->getProductDetail($mahoadon);
+		$data['mahoadon'] = $mahoadon;
+		if ($this->input->server('REQUEST_METHOD') === 'POST') {
+			$masanpham = $this->input->post('masanpham');
+			$soluong = $this->input->post('soluong');
+
+			if(empty($masanpham) || empty($soluong)){
+				$this->session->set_flashdata('error', 'Vui lòng chọn sản phẩm và số lượng!');
+				return redirect(base_url('admin/hoa-don/them/'.$mahoadon.'/san-pham')); 
+			}
+
+			$this->Model_HoaDon->addDetail($mahoadon, $masanpham, $soluong);
+
+			$tongtien = $this->Model_HoaDon->getByIdTaiQuan($mahoadon)[0]['TongTien'];
+			$soluongcu = $this->Model_HoaDon->getByIdTaiQuan($mahoadon)[0]['SoLuong'];
+
+			$tongtienmoi = ($this->Model_SanPham->getById($masanpham)[0]['GiaBan'] * $soluong) + $tongtien; 
+			$soluongmoi = $soluong + $soluongcu;
+
+
+			$this->Model_HoaDon->update($tongtienmoi, $soluongmoi, $mahoadon);
+
+			$this->session->set_flashdata('success', 'Thêm sản phẩm vào hóa đơn thành công!');
+			return redirect(base_url('admin/hoa-don/them/'.$mahoadon.'/san-pham')); 
+		}
+		return $this->load->view('Admin/View_ThemSanPhamDonHang', $data);
+	}
+
+	public function getByIdCategory($machuyenmuc){
+		$sanpham = $this->Model_SanPham->getByIdCategory($machuyenmuc);
+		echo json_encode($sanpham, true);
+	}
+
+	public function deleteProductOrder($machitiethoadon){
+		$mahoadon = $this->input->get('mahoadon');
+
+		$soluong = $this->Model_HoaDon->getDetailDelete($machitiethoadon)[0]['SoLuong'];
+		$giaban = $this->Model_HoaDon->getDetailDelete($machitiethoadon)[0]['GiaBan'] * $soluong;
+
+
+		$tongtienmoi = $this->Model_HoaDon->getByIdTaiQuan($mahoadon)[0]['TongTien'] - $giaban; 
+		$soluongmoi = $this->Model_HoaDon->getByIdTaiQuan($mahoadon)[0]['SoLuong'] - $soluong;
+
+		$this->Model_HoaDon->update($tongtienmoi, $soluongmoi, $mahoadon);
+
+		$this->Model_HoaDon->deleteProductOrder($machitiethoadon);
+
+		$this->session->set_flashdata('success', 'Xóa sản phẩm khỏi hóa đơn thành công!');
+		return redirect(base_url('admin/hoa-don/them/'.$mahoadon.'/san-pham')); 
+	}
+
 	public function view($mahoadon){
-		if(count($this->Model_HoaDon->getById($mahoadon)) <= 0){
+		if((count($this->Model_HoaDon->getById($mahoadon)) <= 0) && (count($this->Model_HoaDon->getByIdTaiQuan($mahoadon)) <= 0)){
 			$this->session->set_flashdata('error', 'Hóa đơn không tồn tại!');
 			return redirect(base_url('admin/hoa-don/'));
 		}
+
+		$data['detail'] = $this->Model_HoaDon->getById($mahoadon);
+		$data['muataiquan'] = false;
+
+		if(count($this->Model_HoaDon->getByIdTaiQuan($mahoadon)) >= 1){
+			$data['detail'] = $this->Model_HoaDon->getByIdTaiQuan($mahoadon);
+			$data['muataiquan'] = true;
+		}
+
 		$data['config'] = $this->Model_CauHinh->getAll();
 		$data['list'] = $this->Model_HoaDon->getDetailById($mahoadon);
-		$data['detail'] = $this->Model_HoaDon->getById($mahoadon);
 		$data['title'] = "Chi tiết hóa đơn";
 		return $this->load->view('Admin/View_XemHoaDon', $data);
 	}

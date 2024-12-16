@@ -37,7 +37,9 @@
                       <th>Địa Chỉ</th>
                       <th>Ngày Tham Gia</th>
                       <th>Trạng Thái</th>
-                      <th>Hành Động</th>
+                      <?php if($_SESSION['phanquyen'] == 1){ ?>
+                        <th>Hành Động</th>
+                      <?php }?>
                     </tr>
                   </thead>
                   <tbody>
@@ -63,19 +65,21 @@
                         <td>
                           <?php echo $value['TrangThai'] == 0 ? "Bị cấm" : "Sử dụng"; ?>
                         </td>
-	                      <td>
-                          <?php if($value['TrangThai'] == 0){ ?>
-  	                      	<a href="<?php echo base_url('admin/khach-hang/'.$value['MaKhachHang'].'/xem/'); ?>" class="btn btn-primary" style="color: white;">
-  	                      		<i class="fa-solid fa-lock-open"></i>
-                              	<span>BỎ CẤM TÀI KHOẢN</span>
-                            </a>
-                          <?php }else{ ?>
-                            <a href="<?php echo base_url('admin/khach-hang/'.$value['MaKhachHang'].'/xem/'); ?>" class="btn btn-danger" style="color: white;">
-                              <i class="fa-solid fa-ban"></i>
-                                <span>CẤM TÀI KHOẢN</span>
-                            </a>
-                          <?php } ?>
-	                      </td>
+                        <?php if($_SESSION['phanquyen'] == 1){ ?>
+  	                      <td>
+                            <?php if($value['TrangThai'] == 0){ ?>
+    	                      	<a href="<?php echo base_url('admin/khach-hang/'.$value['MaKhachHang'].'/xem/'); ?>" class="btn btn-primary" style="color: white;">
+    	                      		<i class="fa-solid fa-lock-open"></i>
+                                	<span>BỎ CẤM TÀI KHOẢN</span>
+                              </a>
+                            <?php }else{ ?>
+                              <a href="<?php echo base_url('admin/khach-hang/'.$value['MaKhachHang'].'/xem/'); ?>" class="btn btn-danger" style="color: white;">
+                                <i class="fa-solid fa-ban"></i>
+                                  <span>CẤM TÀI KHOẢN</span>
+                              </a>
+                            <?php } ?>
+  	                      </td>
+                        <?php } ?>
 	                    </tr>
                     <?php endforeach ?>
                   </tbody>

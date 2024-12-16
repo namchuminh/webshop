@@ -96,13 +96,18 @@ class NhanVien extends CI_Controller {
             $sodienthoai = $this->input->post('sodienthoai');
             $phanquyen = $this->input->post('phanquyen');
             $trangthai = $this->input->post('trangthai');
+            $matkhau = $this->Model_NhanVien->getById($manhanvien)[0]['MatKhau'];
 
             if(empty($hoten) || empty($taikhoan) || empty($email) || empty($sodienthoai)){
                 $data['error'] = "Vui lòng nhập đủ thông tin!";
                 return $this->load->view('Admin/View_SuaNhanVien', $data);
             }
 
-            $this->Model_NhanVien->updateNhanVien($hoten, $taikhoan, $email, $sodienthoai, $phanquyen, $trangthai, $manhanvien);
+            if(isset($_POST['matkhau']) && !empty($_POST['matkhau'])){
+                $matkhau = md5($this->input->post('matkhau'));
+            }
+
+            $this->Model_NhanVien->updateNhanVien($hoten, $taikhoan, $email, $sodienthoai, $phanquyen, $matkhau, $trangthai, $manhanvien);
 
             $data['success'] = "Cập nhật thông tin nhân viên thành công!";
             $data['detail'] = $this->Model_NhanVien->getById($manhanvien);

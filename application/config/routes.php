@@ -61,6 +61,11 @@ $route['admin/hoa-don/tim-kiem'] = 'Admin/HoaDon/search';
 $route['admin/hoa-don/tim-kiem/(:any)/trang'] = 'Admin/HoaDon/pageSearch/$1';
 $route['admin/hoa-don/thong-ke'] = 'Admin/HoaDon/type';
 $route['admin/hoa-don/thong-ke/(:any)/trang'] = 'Admin/HoaDon/pageType/$1';
+$route['admin/hoa-don/them'] = 'Admin/HoaDon/add';
+$route['admin/hoa-don/them/(:any)/san-pham'] = 'Admin/HoaDon/addProductOrder/$1';
+$route['admin/hoa-don/chuyen-muc/(:any)'] = 'Admin/HoaDon/getByIdCategory/$1';
+$route['admin/hoa-don/xoa/(:any)/san-pham'] = 'Admin/HoaDon/deleteProductOrder/$1';
+
 
 $route['admin/nhan-vien'] = 'Admin/NhanVien';
 $route['admin/nhan-vien/(:any)/trang'] = 'Admin/NhanVien/page/$1';

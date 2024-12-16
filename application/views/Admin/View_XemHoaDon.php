@@ -32,7 +32,16 @@
                   </span>
                   <span style="display: flex;">
                       <b>Tên Khách Hàng: </b>
-                      <p style="margin-left: 10px;"><?php echo $detail[0]['HoTen'] ?></p>
+                      <p style="margin-left: 10px;">
+                        <?php 
+                          if($muataiquan == false){
+                            echo $detail[0]['HoTen'];
+                          }else{
+                            echo $detail[0]['TenKhachHang'];
+                          }
+                        ?>
+                        (<?php echo $detail[0]['SoDienThoai']; ?>)
+                      </p>
                   </span>
                   <span style="display: flex;">
                       <b>Địa Chỉ Nhận: </b>
@@ -48,6 +57,9 @@
                   </span>
               </div>
               <!-- /.card-header -->
+              <div class="card-header text-right">
+                  <a href="<?php echo base_url('admin/hoa-don/them/'.$detail[0]['MaHoaDon'].'/san-pham'); ?>" class="btn btn-primary not_print">Thêm Sản Phẩm</a>
+              </div>
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover">
                   <thead>
@@ -81,6 +93,9 @@
                     <?php endforeach ?>
                   </tbody>
                 </table>
+                <?php if(count($list) <= 0){ ?>
+                  <p class="text-center mt-4">Không có sản phẩm nào!</p>
+                <?php } ?>
                 <div class="text-right mt-2 d-flex justify-content-end mr-4">
                   <span class="d-flex m-1">
                       <b>Tạm Tính: </b>

@@ -41,7 +41,9 @@
                       <th>Hình Ảnh</th>
                       <th>Tên Chuyên Mục</th>
                       <th>Đường Dẫn</th>
-                      <th>Hành Động</th>
+                      <?php if($_SESSION['phanquyen'] == 1){ ?>
+                        <th>Hành Động</th>
+                      <?php } ?>
                     </tr>
                   </thead>
                   <tbody>
@@ -53,6 +55,7 @@
 	                      <td>
 	                      	<a href="<?php echo base_url('chuyen-muc/'.$value['DuongDan'].'/'); ?>" target="_blank"><?php echo $value['DuongDan']; ?></a>
 	                      </td>
+                        <?php if($_SESSION['phanquyen'] == 1){ ?>
 	                      <td>
 	                      	<a href="<?php echo base_url('admin/chuyen-muc/'.$value['MaChuyenMuc'].'/sua/'); ?>" class="btn btn-primary" style="color: white;">
 	                      		<i class="fas fa-edit"></i>
@@ -63,6 +66,7 @@
                             	<span>XÓA</span>
                            	</a>
 	                      </td>
+                        <?php } ?>
 	                    </tr>
                     <?php endforeach ?>
                   </tbody>
