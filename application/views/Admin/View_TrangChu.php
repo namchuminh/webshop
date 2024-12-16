@@ -300,77 +300,84 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   $(document).ready(function(){
+      // Biểu đồ số lượng đơn hàng theo tháng
       $.get('<?php echo base_url("admin/don-hang-thang/"); ?>', function(data){
-
-        var data = JSON.parse(data)
-        // Dữ liệu doanh thu theo tháng
+        var data = JSON.parse(data);
+        // Dữ liệu tháng
         var months = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
         var order = data;
 
         // Lấy thẻ canvas
         var ctx = document.getElementById('orderChar').getContext('2d');
 
-        // Khởi tạo biểu đồ đường
+        // Khởi tạo biểu đồ cột
         var orderChar = new Chart(ctx, {
-            type: 'line',
+            type: 'bar', // Đổi thành biểu đồ cột
             data: {
                 labels: months,
                 datasets: [{
                     label: 'Đơn Hàng Theo Tháng',
                     data: order,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1,
-                    fill: true
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Màu nền
+                    borderColor: 'rgb(75, 192, 192)', // Màu viền
+                    borderWidth: 1
                 }]
             },
             options: {
                 scales: {
-                  y: {
-                      beginAtZero: true,
-                      ticks: {
-                          stepSize: 1, // Đảm bảo chỉ hiển thị số nguyên
-                          callback: function(value, index, values) {
-                              return Math.round(value); // Làm tròn giá trị
-                          }
-                      }
-                  }
-              }
-            },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1, // Đảm bảo hiển thị số nguyên
+                            callback: function(value) {
+                                return Math.round(value); // Làm tròn giá trị
+                            }
+                        }
+                    }
+                }
+            }
         });
-      })
+      });
 
+      // Biểu đồ doanh thu theo tháng
       $.get('<?php echo base_url("admin/doanh-thu-thang/"); ?>', function(data){
-
-        var data = JSON.parse(data)
-        // Dữ liệu doanh thu theo tháng
+        var data = JSON.parse(data);
+        // Dữ liệu tháng
         var months = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
         var revenues = data;
 
         // Lấy thẻ canvas
         var ctx = document.getElementById('revenueChart').getContext('2d');
 
-        // Khởi tạo biểu đồ đường
+        // Khởi tạo biểu đồ cột
         var revenueChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar', // Đổi thành biểu đồ cột
             data: {
                 labels: months,
                 datasets: [{
-                    label: 'Doanh thu theo tháng (VND)',
+                    label: 'Doanh Thu Theo Tháng (VND)',
                     data: revenues,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1,
-                    fill: true
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Màu nền
+                    borderColor: 'rgb(54, 162, 235)', // Màu viền
+                    borderWidth: 1
                 }]
             },
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                // Hiển thị giá trị dưới dạng tiền tệ
+                                return value.toLocaleString('vi-VN') + ' đ';
+                            }
+                        }
                     }
                 }
             }
         });
-      })
+      });
   });
 </script>
+
 
