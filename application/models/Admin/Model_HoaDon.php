@@ -126,24 +126,24 @@ class Model_HoaDon extends CI_Model {
 	}
 
 	public function checkNumberSearch($madonhang,$thanhtoan,$trangthai){
-		$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.MaHoaDon = ? OR hoadon.ThanhToan = ? OR hoadon.TrangThai = ? ORDER BY hoadon.MaHoaDon";
+		$sql = "SELECT hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.TrangThai FROM hoadon LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.MaHoaDon = ? OR hoadon.ThanhToan = ? OR hoadon.TrangThai = ? ORDER BY hoadon.MaHoaDon";
 		$result = $this->db->query($sql, array($madonhang,$thanhtoan,$trangthai));
 		return $result->num_rows();
 	}
 
 	public function search($madonhang,$thanhtoan,$trangthai,$start = 0, $end = 10){
-		$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.MaHoaDon = ? OR hoadon.ThanhToan = ? OR hoadon.TrangThai = ? ORDER BY hoadon.MaHoaDon DESC LIMIT ?, ?";
+		$sql = "SELECT hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.TrangThai FROM hoadon LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.MaHoaDon = ? OR hoadon.ThanhToan = ? OR hoadon.TrangThai = ? ORDER BY hoadon.MaHoaDon DESC LIMIT ?, ?";
 		$result = $this->db->query($sql, array($madonhang,$thanhtoan,$trangthai,$start,$end));
 		return $result->result_array();
 	}
 
 	public function checkNumberType($type){
 		if($type == "thang"){
-			$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE MONTH(hoadon.ThoiGian) = ? AND YEAR(hoadon.ThoiGian) = YEAR(CURDATE()) ORDER BY hoadon.MaHoaDon DESC";
+			$sql = "SELECT hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.TrangThai FROM hoadon LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE MONTH(hoadon.ThoiGian) = ? AND YEAR(hoadon.ThoiGian) = YEAR(CURDATE()) ORDER BY hoadon.MaHoaDon DESC";
 			$result = $this->db->query($sql, array(date('m')));
 			return $result->num_rows();
 		}else if($type == "tuan"){
-			$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1 ORDER BY hoadon.MaHoaDon DESC";
+			$sql = "SELECT hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.TrangThai FROM hoadon LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1 ORDER BY hoadon.MaHoaDon DESC";
 			$result = $this->db->query($sql, array(date('m')));
 			return $result->num_rows();
 		}
@@ -151,11 +151,11 @@ class Model_HoaDon extends CI_Model {
 
 	public function getType($type,$start = 0,$end = 10){
 		if($type == "thang"){
-			$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE MONTH(hoadon.ThoiGian) = ? AND YEAR(hoadon.ThoiGian) = YEAR(CURDATE()) ORDER BY hoadon.MaHoaDon DESC LIMIT ?, ?";
+			$sql = "SELECT hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.TrangThai FROM hoadon LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE MONTH(hoadon.ThoiGian) = ? AND YEAR(hoadon.ThoiGian) = YEAR(CURDATE()) ORDER BY hoadon.MaHoaDon DESC LIMIT ?, ?";
 			$result = $this->db->query($sql, array(date('m'), $start, $end));
 			return $result->result_array();
 		}else if($type == "tuan"){
-			$sql = "SELECT khachhang.HoTen, khachhang.MaKhachHang, hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.DiaChi, hoadon.TrangThai FROM hoadon INNER JOIN khachhang ON hoadon.MaKhachHang = khachhang.MaKhachHang LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1 ORDER BY hoadon.MaHoaDon DESC LIMIT ?, ?";
+			$sql = "SELECT hoadon.MaHoaDon, hoadon.MaKhachHang, hoadon.TongTien, hoadon.ThoiGian, hoadon.ThanhToan, COALESCE(magiamgia.GiaTriGiam, 0) AS GiaTriGiam, hoadon.SoLuong, hoadon.TrangThai FROM hoadon LEFT JOIN magiamgia ON hoadon.MaGiamGia = magiamgia.MaGiamGia WHERE hoadon.ThoiGian BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() + 1 ORDER BY hoadon.MaHoaDon DESC LIMIT ?, ?";
 			$result = $this->db->query($sql, array($start, $end));
 			return $result->result_array();
 		}

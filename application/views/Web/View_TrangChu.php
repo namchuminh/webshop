@@ -152,7 +152,7 @@
                             <ul> 
                                 <?php foreach ($category as $key => $value): ?>
                                     <li>
-                                        <a class="dropdown-item nav-link nav_item" href="coming-soon.html">
+                                        <a class="dropdown-item nav-link nav_item" href="<?php echo base_url('chuyen-muc/'.$value['DuongDan'].'/'); ?>">
                                             <img style="width: 30px; height: 30px;" src="<?php echo $value['HinhAnh']; ?>">
                                             <span style="color: black; font-family: system-ui; font-size:15px; margin-left: 10px;"><?php echo $value['TenChuyenMuc']; ?></span>
                                         </a>

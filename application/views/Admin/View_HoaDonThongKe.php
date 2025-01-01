@@ -68,8 +68,6 @@
                   <thead>
                     <tr>
                       <th>Mã Hóa Đơn</th>
-                      <th>Tên Khách Hàng</th>
-                      <th width="300px">Địa Chỉ Nhận</th>
                       <th>Số Lượng</th>
                       <th>Giảm Giá</th>
                       <th>Tổng Tiền</th>
@@ -83,10 +81,6 @@
                   	<?php foreach ($list as $key => $value): ?>
 	                    <tr>
 	                      <td>000<?php echo $value['MaHoaDon']; ?></td>
-	                      <td>
-                          <a href="<?php echo base_url('admin/khach-hang/'.$value['MaKhachHang'].'/xem/'); ?>"><?php echo $value['HoTen']; ?></a>
-                        </td>
-	                      <td><?php echo $value['DiaChi']; ?></td>
 	                      <td>
 	                      	<?php echo $value['SoLuong']; ?> sản phẩm
 	                      </td>
