@@ -83,6 +83,12 @@ class Model_HoaDon extends CI_Model {
 		return $result->result_array();
 	}
 
+	public function getByIdAction($MaHoaDon){
+		$sql = "SELECT * FROM hoadon WHERE MaHoaDon = ?";
+		$result = $this->db->query($sql, array($MaHoaDon));
+		return $result->result_array();
+	}
+
 	public function getDetailById($MaHoaDon){
 		$sql = "SELECT chitiethoadon.*, sanpham.TenSanPham, sanpham.HinhAnh, sanpham.GiaBan FROM chitiethoadon, sanpham WHERE chitiethoadon.MaSanPham = sanpham.MaSanPham AND chitiethoadon.MaHoaDon = ?";
 		$result = $this->db->query($sql, array($MaHoaDon));

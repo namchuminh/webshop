@@ -89,6 +89,11 @@ class HoaDon extends CI_Controller {
 				return redirect(base_url('admin/hoa-don/them/'.$mahoadon.'/san-pham')); 
 			}
 
+			if($soluong > $this->Model_SanPham->getById($masanpham)[0]['SoLuong']){
+				$this->session->set_flashdata('error', 'Số lượng nhập quá tổng sản phẩm trong kho!');
+				return redirect(base_url('admin/hoa-don/them/'.$mahoadon.'/san-pham')); 
+			}
+
 			$this->Model_HoaDon->addDetail($mahoadon, $masanpham, $soluong);
 
 			$tongtien = $this->Model_HoaDon->getByIdTaiQuan($mahoadon)[0]['TongTien'];
@@ -151,12 +156,12 @@ class HoaDon extends CI_Controller {
 
 	public function pay($mahoadon)
 	{
-		if(count($this->Model_HoaDon->getById($mahoadon)) <= 0){
+		if(count($this->Model_HoaDon->getByIdAction($mahoadon)) <= 0){
 			$this->session->set_flashdata('error', 'Hóa đơn không tồn tại!');
 			return redirect(base_url('admin/hoa-don/'));
 		}
 
-		$detail = $this->Model_HoaDon->getById($mahoadon);
+		$detail = $this->Model_HoaDon->getByIdAction($mahoadon);
 
 		if(($detail[0]['ThanhToan'] != 1) && ($detail[0]['TrangThai'] != 0) && ($detail[0]['TrangThai'] != 4)){
 			$this->Model_HoaDon->updatePay($mahoadon);
@@ -170,12 +175,12 @@ class HoaDon extends CI_Controller {
 
 
 	public function cancel($mahoadon){
-		if(count($this->Model_HoaDon->getById($mahoadon)) <= 0){
+		if(count($this->Model_HoaDon->getByIdAction($mahoadon)) <= 0){
 			$this->session->set_flashdata('error', 'Hóa đơn không tồn tại!');
 			return redirect(base_url('admin/hoa-don/'));
 		}
 
-		$detail = $this->Model_HoaDon->getById($mahoadon);
+		$detail = $this->Model_HoaDon->getByIdAction($mahoadon);
 
 		if(($detail[0]['TrangThai'] <= 2) && ($detail[0]['TrangThai'] != 0) && ($detail[0]['TrangThai'] != 4)){
 			$this->Model_HoaDon->cancel($mahoadon);
@@ -197,12 +202,12 @@ class HoaDon extends CI_Controller {
 
 
 	public function status($mahoadon){
-		if(count($this->Model_HoaDon->getById($mahoadon)) <= 0){
+		if(count($this->Model_HoaDon->getByIdAction($mahoadon)) <= 0){
 			$this->session->set_flashdata('error', 'Hóa đơn không tồn tại!');
 			return redirect(base_url('admin/hoa-don/'));
 		}
 
-		$detail = $this->Model_HoaDon->getById($mahoadon);
+		$detail = $this->Model_HoaDon->getByIdAction($mahoadon);
 
 		if(($detail[0]['TrangThai'] == 1) || ($detail[0]['TrangThai'] == 2) || ($detail[0]['TrangThai'] == 3)){
 			$status = $detail[0]['TrangThai'] + 1;
